@@ -6,25 +6,25 @@ This document defines the team division, roles, and the daily deadline schedule 
 
 ## 👥 Team Division & Roles
 
-### 🧠 Category 1: ML & Optimization Engine (2 Developers)
+### 🧠 Category 1: ML & Optimization Engine (3 Developers)
 This team works on analyzing the `FMCG_data.csv` dataset, training the predictive model, and building the mathematical optimization logic.
 
 *   **Role A: Lead ML Engineer** (Assigned: **DineshReddy-Gajjala**)
     *   **Focus:** Training the core XGBoost model to predict shipment delays and performance tuning.
-*   **Role B: Feature Engineering & Optimization Prototyping** (Assigned: **karthikpuchaginjala**)
-    *   **Focus:** Preprocessing `FMCG_data.csv`, feature engineering (nulls, category encoding), and coding the SciPy linear solver baseline.
+*   **Role B: Feature Engineering & Data Analyst** (Assigned: **karthikpuchaginjala**)
+    *   **Focus:** Preprocessing `FMCG_data.csv`, feature engineering (nulls, category encoding), and evaluating model accuracy.
+*   **Role C: Optimization Developer** (Assigned: **Sameer0166**)
+    *   **Focus:** Prototyping mathematical constraints (budget, capacity, time) and writing the SciPy linear solver code.
 
 ---
 
-### 💻 Category 2: Operational UI & Write-Back (3 Developers)
+### 💻 Category 2: Operational UI & Write-Back (2 Developers)
 This team works on building the FastAPI backend server, setting up the database, building the dashboard, and connecting all modules together.
 
-*   **Role C: Backend & Database Developer** (Assigned: **dhrubojyotihazra**)
-    *   **Focus:** Database schema setup (storing predictions, decision logs, and outcomes) and building FastAPI endpoints for write-back.
-*   **Role D: Frontend & Dashboard Developer** (Assigned: **Sameer0166**)
+*   **Role D: Backend & Database Developer** (Assigned: **dhrubojyotihazra**)
+    *   **Focus:** Database schema setup (storing predictions, decision logs, and outcomes) and writing the FastAPI backend and write-back endpoints.
+*   **Role E: Frontend & Dashboard Developer** (Assigned: **ravichandranithin**)
     *   **Focus:** Designing the Retool or React UI dashboard to show delay warnings, display recommendations, and handle user interactions.
-*   **Role E: Integration & Quality Assurance Engineer** (Assigned: **ravichandranithin**)
-    *   **Focus:** Connecting frontend UI elements to the FastAPI backend endpoints, testing the write-back pipeline, and validating the end-to-end data flow.
 
 ---
 
