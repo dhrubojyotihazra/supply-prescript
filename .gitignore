@@ -50,4 +50,4 @@ venv.bak/
 *.pkl
 *.h5
 *.npy
-data/
+!data/FMCG_data.csv
