@@ -7,6 +7,7 @@ from api.database import engine as db_engine, Base, get_db
 import api.models as models
 import api.schemas as schemas
 from engine.predictive import predict_delay_risk
+from engine.prescriptive import generate_optimal_choices
 
 # Auto-create tables in Supabase PostgreSQL
 Base.metadata.create_all(bind=db_engine)
@@ -57,6 +58,25 @@ def predict_delay(features: dict):
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/prescribe")
+def prescribe_actions(budgets: Optional[List[float]] = Query(None, description="Custom budget limits list")):
+    """
+    Runs Sameer's SciPy LP optimization solver to prescribe 3 optimal shipping allocation choices (A, B, C).
+    """
+    try:
+        if budgets:
+            # Generate optimal choices for custom budgets
+            choices = generate_optimal_choices(budgets)
+        else:
+            # Default budgets: Choice A (50000), Choice B (30000), Choice C (25000)
+            choices = generate_optimal_choices()
+        return {
+            "status": "success",
+            "choices": choices
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/execute-decision", response_model=schemas.DecisionResponse, status_code=status.HTTP_201_CREATED)
 def execute_decision(decision: schemas.DecisionCreate, db: Session = Depends(get_db)):
