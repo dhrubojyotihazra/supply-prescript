@@ -1,0 +1,17 @@
+Production_ID,Product_Category,Daily_Capacity_Units,Can_Expedite,Expedite_Cost_Per_Unit_USD,Max_Expedite_Days
+PROD-ELEC-1,Electronics,1679,True,5.57,3
+PROD-ELEC-2,Electronics,672,True,2.33,4
+PROD-APPA-1,Apparel,1310,True,0.9,2
+PROD-APPA-2,Apparel,555,False,,0
+PROD-AUTO-1,Automotive_Parts,260,True,6.0,2
+PROD-AUTO-2,Automotive_Parts,2334,False,,0
+PROD-PHAR-1,Pharmaceuticals,2080,True,2.53,4
+PROD-PHAR-2,Pharmaceuticals,1719,True,0.93,4
+PROD-CONS-1,Consumer_Goods,1795,True,1.78,4
+PROD-CONS-2,Consumer_Goods,2955,True,4.62,3
+PROD-INDU-1,Industrial_Equipment,2089,True,4.03,5
+PROD-INDU-2,Industrial_Equipment,562,True,3.63,4
+PROD-FOOD-1,Food_Beverage,2078,False,,0
+PROD-FOOD-2,Food_Beverage,2155,True,3.46,1
+PROD-FURN-1,Furniture,2637,True,2.69,4
+PROD-FURN-2,Furniture,255,False,,0

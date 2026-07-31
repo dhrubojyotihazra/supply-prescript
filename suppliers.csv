@@ -1,0 +1,557 @@
+Supplier_ID,Supplier_Name,Country,Supplier_Type,Rating,OnTime_Rate,Secondary_Supplier_ID,Secondary_Premium_Pct,Lead_Time_Days
+1001,Supplier-1001,China,Primary,4.55,0.835,91001.0,0.167,2
+91001,Backup-Supplier-91001,China,Secondary,2.69,0.765,,,4
+1002,Supplier-1002,South Korea,Primary,4.23,1.0,91002.0,0.107,8
+91002,Backup-Supplier-91002,South Korea,Secondary,3.66,0.993,,,4
+1003,Supplier-1003,Bangladesh,Primary,3.95,1.0,91003.0,0.147,10
+91003,Backup-Supplier-91003,Bangladesh,Secondary,2.34,0.646,,,6
+1005,Supplier-1005,USA,Primary,3.49,0.941,91005.0,0.11,4
+91005,Backup-Supplier-91005,USA,Secondary,3.86,0.731,,,11
+1007,Supplier-1007,China,Primary,3.42,0.796,91007.0,0.17,15
+91007,Backup-Supplier-91007,China,Secondary,3.81,0.598,,,9
+1008,Supplier-1008,South Korea,Primary,3.18,0.884,91008.0,0.143,13
+91008,Backup-Supplier-91008,South Korea,Secondary,2.94,0.646,,,10
+1009,Supplier-1009,Mexico,Primary,3.94,0.799,91009.0,0.131,10
+91009,Backup-Supplier-91009,Mexico,Secondary,3.52,0.832,,,6
+1013,Supplier-1013,China,Primary,4.08,0.807,91013.0,0.166,17
+91013,Backup-Supplier-91013,China,Secondary,2.77,0.51,,,12
+1014,Supplier-1014,Germany,Primary,5.0,0.819,91014.0,0.127,10
+91014,Backup-Supplier-91014,Germany,Secondary,3.3,0.777,,,4
+1016,Supplier-1016,Vietnam,Primary,4.15,0.912,91016.0,0.143,14
+91016,Backup-Supplier-91016,Vietnam,Secondary,4.94,0.821,,,6
+1019,Supplier-1019,China,Primary,3.71,0.922,91019.0,0.18,6
+91019,Backup-Supplier-91019,China,Secondary,2.29,0.82,,,6
+1023,Supplier-1023,China,Primary,4.91,0.843,91023.0,0.097,7
+91023,Backup-Supplier-91023,China,Secondary,3.91,0.838,,,5
+1026,Supplier-1026,Mexico,Primary,3.91,0.981,91026.0,0.105,5
+91026,Backup-Supplier-91026,Mexico,Secondary,3.49,0.692,,,6
+1028,Supplier-1028,China,Primary,3.75,0.689,91028.0,0.092,13
+91028,Backup-Supplier-91028,China,Secondary,3.13,0.492,,,10
+1030,Supplier-1030,India,Primary,3.96,0.789,91030.0,0.081,15
+91030,Backup-Supplier-91030,India,Secondary,3.74,1.0,,,9
+1033,Supplier-1033,Brazil,Primary,4.03,0.843,91033.0,0.107,14
+91033,Backup-Supplier-91033,Brazil,Secondary,4.38,0.737,,,6
+1035,Supplier-1035,South Korea,Primary,3.51,0.939,91035.0,0.063,10
+91035,Backup-Supplier-91035,South Korea,Secondary,3.2,0.838,,,7
+1036,Supplier-1036,Bangladesh,Primary,4.37,0.635,91036.0,0.063,8
+91036,Backup-Supplier-91036,Bangladesh,Secondary,1.88,0.684,,,5
+1037,Supplier-1037,Brazil,Primary,3.68,0.971,91037.0,0.057,7
+91037,Backup-Supplier-91037,Brazil,Secondary,3.46,0.926,,,5
+1038,Supplier-1038,Brazil,Primary,3.25,0.916,91038.0,0.101,14
+91038,Backup-Supplier-91038,Brazil,Secondary,3.49,0.884,,,4
+1041,Supplier-1041,USA,Primary,3.79,0.839,91041.0,0.114,5
+91041,Backup-Supplier-91041,USA,Secondary,3.98,0.758,,,4
+1042,Supplier-1042,Japan,Primary,3.74,0.973,91042.0,0.082,6
+91042,Backup-Supplier-91042,Japan,Secondary,2.85,0.975,,,8
+1048,Supplier-1048,Vietnam,Primary,4.26,0.746,91048.0,0.11,13
+91048,Backup-Supplier-91048,Vietnam,Secondary,3.54,0.866,,,7
+1049,Supplier-1049,South Korea,Primary,3.97,0.876,91049.0,0.074,15
+91049,Backup-Supplier-91049,South Korea,Secondary,2.37,0.53,,,11
+1050,Supplier-1050,Germany,Primary,4.51,0.758,91050.0,0.16,12
+91050,Backup-Supplier-91050,Germany,Secondary,4.15,1.0,,,9
+1053,Supplier-1053,Bangladesh,Primary,3.58,0.771,91053.0,0.083,10
+91053,Backup-Supplier-91053,Bangladesh,Secondary,2.79,1.0,,,13
+1054,Supplier-1054,Vietnam,Primary,4.48,0.768,91054.0,0.091,14
+91054,Backup-Supplier-91054,Vietnam,Secondary,3.81,0.95,,,9
+1055,Supplier-1055,China,Primary,4.24,0.924,91055.0,0.054,4
+91055,Backup-Supplier-91055,China,Secondary,3.56,0.733,,,4
+1056,Supplier-1056,Japan,Primary,4.81,1.0,91056.0,0.091,13
+91056,Backup-Supplier-91056,Japan,Secondary,4.45,0.801,,,8
+1057,Supplier-1057,South Korea,Primary,3.14,0.9,91057.0,0.116,6
+91057,Backup-Supplier-91057,South Korea,Secondary,3.46,0.79,,,13
+1060,Supplier-1060,Vietnam,Primary,4.34,0.861,91060.0,0.167,12
+91060,Backup-Supplier-91060,Vietnam,Secondary,3.36,0.67,,,7
+1061,Supplier-1061,Brazil,Primary,3.35,0.735,91061.0,0.088,13
+91061,Backup-Supplier-91061,Brazil,Secondary,2.25,0.785,,,10
+1063,Supplier-1063,Bangladesh,Primary,4.44,0.963,91063.0,0.083,8
+91063,Backup-Supplier-91063,Bangladesh,Secondary,2.74,0.841,,,9
+1064,Supplier-1064,USA,Primary,4.57,0.97,91064.0,0.149,7
+91064,Backup-Supplier-91064,USA,Secondary,3.28,0.826,,,7
+1065,Supplier-1065,Vietnam,Primary,3.45,0.885,91065.0,0.103,9
+91065,Backup-Supplier-91065,Vietnam,Secondary,3.72,0.752,,,8
+1067,Supplier-1067,China,Primary,3.96,0.746,91067.0,0.073,17
+91067,Backup-Supplier-91067,China,Secondary,2.69,0.546,,,2
+1068,Supplier-1068,Bangladesh,Primary,3.82,0.863,91068.0,0.117,16
+91068,Backup-Supplier-91068,Bangladesh,Secondary,1.63,0.848,,,12
+1069,Supplier-1069,Japan,Primary,3.12,0.822,91069.0,0.163,8
+91069,Backup-Supplier-91069,Japan,Secondary,3.27,0.971,,,13
+1070,Supplier-1070,Brazil,Primary,3.6,1.0,91070.0,0.099,19
+91070,Backup-Supplier-91070,Brazil,Secondary,3.43,0.816,,,9
+1071,Supplier-1071,Japan,Primary,5.0,0.945,91071.0,0.103,15
+91071,Backup-Supplier-91071,Japan,Secondary,3.25,0.741,,,10
+1072,Supplier-1072,Japan,Primary,3.82,0.888,91072.0,0.067,13
+91072,Backup-Supplier-91072,Japan,Secondary,3.8,0.568,,,9
+1074,Supplier-1074,China,Primary,3.21,0.716,91074.0,0.148,12
+91074,Backup-Supplier-91074,China,Secondary,3.01,0.9,,,3
+1077,Supplier-1077,China,Primary,3.56,0.802,91077.0,0.084,13
+91077,Backup-Supplier-91077,China,Secondary,2.79,0.887,,,8
+1078,Supplier-1078,Japan,Primary,2.66,0.664,91078.0,0.083,11
+91078,Backup-Supplier-91078,Japan,Secondary,3.43,0.797,,,8
+1079,Supplier-1079,Germany,Primary,4.37,0.749,91079.0,0.174,7
+91079,Backup-Supplier-91079,Germany,Secondary,3.7,0.949,,,6
+1080,Supplier-1080,Germany,Primary,2.3,0.69,91080.0,0.13,9
+91080,Backup-Supplier-91080,Germany,Secondary,3.21,0.805,,,7
+1081,Supplier-1081,India,Primary,4.43,0.792,91081.0,0.146,13
+91081,Backup-Supplier-91081,India,Secondary,2.43,0.847,,,8
+1082,Supplier-1082,India,Primary,3.71,1.0,91082.0,0.172,20
+91082,Backup-Supplier-91082,India,Secondary,3.34,0.647,,,8
+1083,Supplier-1083,Mexico,Primary,3.15,0.785,91083.0,0.104,14
+91083,Backup-Supplier-91083,Mexico,Secondary,3.06,0.918,,,11
+1084,Supplier-1084,Mexico,Primary,4.66,0.913,91084.0,0.082,4
+91084,Backup-Supplier-91084,Mexico,Secondary,3.28,0.696,,,8
+1085,Supplier-1085,Vietnam,Primary,3.46,0.843,91085.0,0.114,11
+91085,Backup-Supplier-91085,Vietnam,Secondary,3.79,0.772,,,8
+1087,Supplier-1087,USA,Primary,3.8,0.905,91087.0,0.113,18
+91087,Backup-Supplier-91087,USA,Secondary,3.72,0.871,,,4
+1090,Supplier-1090,India,Primary,3.75,0.954,91090.0,0.065,12
+91090,Backup-Supplier-91090,India,Secondary,4.12,0.859,,,11
+1091,Supplier-1091,USA,Primary,3.97,0.824,91091.0,0.074,2
+91091,Backup-Supplier-91091,USA,Secondary,3.77,0.4,,,2
+1095,Supplier-1095,Germany,Primary,4.07,0.908,91095.0,0.094,9
+91095,Backup-Supplier-91095,Germany,Secondary,4.46,0.742,,,14
+1098,Supplier-1098,India,Primary,3.8,0.901,91098.0,0.078,12
+91098,Backup-Supplier-91098,India,Secondary,2.8,0.787,,,7
+1101,Supplier-1101,China,Primary,2.98,0.834,91101.0,0.058,15
+91101,Backup-Supplier-91101,China,Secondary,3.52,0.766,,,7
+1105,Supplier-1105,India,Primary,3.93,0.922,91105.0,0.091,7
+91105,Backup-Supplier-91105,India,Secondary,4.27,0.751,,,3
+1107,Supplier-1107,Bangladesh,Primary,4.07,0.906,91107.0,0.095,12
+91107,Backup-Supplier-91107,Bangladesh,Secondary,4.01,0.845,,,9
+1108,Supplier-1108,Mexico,Primary,2.96,0.893,91108.0,0.147,14
+91108,Backup-Supplier-91108,Mexico,Secondary,3.29,0.742,,,10
+1109,Supplier-1109,Bangladesh,Primary,4.69,1.0,91109.0,0.146,11
+91109,Backup-Supplier-91109,Bangladesh,Secondary,3.75,0.892,,,8
+1110,Supplier-1110,China,Primary,3.88,0.942,91110.0,0.134,9
+91110,Backup-Supplier-91110,China,Secondary,3.21,0.876,,,8
+1112,Supplier-1112,Germany,Primary,4.0,0.927,91112.0,0.135,15
+91112,Backup-Supplier-91112,Germany,Secondary,3.77,0.652,,,12
+1116,Supplier-1116,India,Primary,3.5,0.694,91116.0,0.082,7
+91116,Backup-Supplier-91116,India,Secondary,3.54,0.767,,,6
+1117,Supplier-1117,Bangladesh,Primary,4.17,0.894,91117.0,0.168,13
+91117,Backup-Supplier-91117,Bangladesh,Secondary,3.93,0.547,,,6
+1121,Supplier-1121,Germany,Primary,2.49,0.864,91121.0,0.131,16
+91121,Backup-Supplier-91121,Germany,Secondary,4.33,0.824,,,6
+1122,Supplier-1122,Vietnam,Primary,4.09,0.807,91122.0,0.164,15
+91122,Backup-Supplier-91122,Vietnam,Secondary,3.11,0.897,,,10
+1126,Supplier-1126,India,Primary,3.23,0.957,91126.0,0.114,12
+91126,Backup-Supplier-91126,India,Secondary,2.97,0.697,,,6
+1128,Supplier-1128,Bangladesh,Primary,4.13,0.764,91128.0,0.177,7
+91128,Backup-Supplier-91128,Bangladesh,Secondary,3.36,0.813,,,15
+1131,Supplier-1131,USA,Primary,2.97,1.0,91131.0,0.134,13
+91131,Backup-Supplier-91131,USA,Secondary,3.58,0.853,,,7
+1135,Supplier-1135,China,Primary,4.67,0.814,91135.0,0.162,9
+91135,Backup-Supplier-91135,China,Secondary,3.46,0.671,,,9
+1136,Supplier-1136,India,Primary,4.67,0.852,91136.0,0.151,7
+91136,Backup-Supplier-91136,India,Secondary,3.34,0.609,,,5
+1138,Supplier-1138,Bangladesh,Primary,3.94,0.992,91138.0,0.131,9
+91138,Backup-Supplier-91138,Bangladesh,Secondary,4.5,0.829,,,7
+1139,Supplier-1139,Brazil,Primary,4.06,0.866,91139.0,0.165,10
+91139,Backup-Supplier-91139,Brazil,Secondary,2.52,0.615,,,9
+1140,Supplier-1140,Germany,Primary,3.63,0.8,91140.0,0.115,15
+91140,Backup-Supplier-91140,Germany,Secondary,3.63,0.721,,,11
+1142,Supplier-1142,China,Primary,4.75,0.909,91142.0,0.177,16
+91142,Backup-Supplier-91142,China,Secondary,4.29,0.874,,,9
+1143,Supplier-1143,Japan,Primary,4.11,0.75,91143.0,0.152,6
+91143,Backup-Supplier-91143,Japan,Secondary,2.94,0.956,,,10
+1145,Supplier-1145,Mexico,Primary,4.69,0.833,91145.0,0.114,11
+91145,Backup-Supplier-91145,Mexico,Secondary,3.57,0.809,,,11
+1146,Supplier-1146,Bangladesh,Primary,3.58,0.895,91146.0,0.059,13
+91146,Backup-Supplier-91146,Bangladesh,Secondary,3.5,0.71,,,7
+1148,Supplier-1148,Brazil,Primary,3.69,0.833,91148.0,0.157,11
+91148,Backup-Supplier-91148,Brazil,Secondary,3.33,0.548,,,5
+1151,Supplier-1151,Japan,Primary,3.64,0.791,91151.0,0.062,11
+91151,Backup-Supplier-91151,Japan,Secondary,4.4,0.807,,,8
+1152,Supplier-1152,Vietnam,Primary,3.75,0.86,91152.0,0.11,2
+91152,Backup-Supplier-91152,Vietnam,Secondary,2.1,0.735,,,8
+1153,Supplier-1153,Bangladesh,Primary,4.21,0.907,91153.0,0.073,16
+91153,Backup-Supplier-91153,Bangladesh,Secondary,4.22,0.822,,,10
+1154,Supplier-1154,Japan,Primary,3.96,0.804,91154.0,0.108,12
+91154,Backup-Supplier-91154,Japan,Secondary,3.5,0.977,,,2
+1155,Supplier-1155,Mexico,Primary,2.95,0.741,91155.0,0.135,10
+91155,Backup-Supplier-91155,Mexico,Secondary,2.44,0.682,,,5
+1157,Supplier-1157,China,Primary,5.0,1.0,91157.0,0.053,10
+91157,Backup-Supplier-91157,China,Secondary,2.7,0.571,,,7
+1158,Supplier-1158,Japan,Primary,3.2,0.852,91158.0,0.157,8
+91158,Backup-Supplier-91158,Japan,Secondary,3.6,0.844,,,9
+1159,Supplier-1159,Japan,Primary,3.01,0.945,91159.0,0.138,14
+91159,Backup-Supplier-91159,Japan,Secondary,3.49,0.635,,,7
+1162,Supplier-1162,Bangladesh,Primary,4.02,0.921,91162.0,0.166,18
+91162,Backup-Supplier-91162,Bangladesh,Secondary,4.21,0.769,,,10
+1163,Supplier-1163,USA,Primary,4.96,1.0,91163.0,0.075,8
+91163,Backup-Supplier-91163,USA,Secondary,4.54,0.673,,,4
+1165,Supplier-1165,USA,Primary,3.51,0.902,91165.0,0.068,9
+91165,Backup-Supplier-91165,USA,Secondary,3.03,0.715,,,5
+1166,Supplier-1166,South Korea,Primary,5.0,0.89,91166.0,0.129,10
+91166,Backup-Supplier-91166,South Korea,Secondary,3.37,0.714,,,2
+1167,Supplier-1167,Bangladesh,Primary,2.97,0.679,91167.0,0.131,7
+91167,Backup-Supplier-91167,Bangladesh,Secondary,4.43,0.795,,,11
+1169,Supplier-1169,Brazil,Primary,4.05,0.938,91169.0,0.056,14
+91169,Backup-Supplier-91169,Brazil,Secondary,4.01,0.731,,,9
+1170,Supplier-1170,Brazil,Primary,4.14,0.805,91170.0,0.177,7
+91170,Backup-Supplier-91170,Brazil,Secondary,3.56,0.839,,,5
+1171,Supplier-1171,Brazil,Primary,3.82,0.917,91171.0,0.075,18
+91171,Backup-Supplier-91171,Brazil,Secondary,4.39,0.68,,,13
+1172,Supplier-1172,Brazil,Primary,3.48,0.964,91172.0,0.132,10
+91172,Backup-Supplier-91172,Brazil,Secondary,2.23,0.779,,,3
+1174,Supplier-1174,Brazil,Primary,4.38,1.0,91174.0,0.11,13
+91174,Backup-Supplier-91174,Brazil,Secondary,2.99,0.725,,,10
+1175,Supplier-1175,Mexico,Primary,3.78,1.0,91175.0,0.072,15
+91175,Backup-Supplier-91175,Mexico,Secondary,3.57,0.895,,,6
+1176,Supplier-1176,Brazil,Primary,3.77,0.848,91176.0,0.157,14
+91176,Backup-Supplier-91176,Brazil,Secondary,3.96,0.871,,,12
+1179,Supplier-1179,Bangladesh,Primary,4.67,0.823,91179.0,0.17,9
+91179,Backup-Supplier-91179,Bangladesh,Secondary,3.52,0.728,,,12
+1182,Supplier-1182,China,Primary,4.02,0.838,91182.0,0.147,3
+91182,Backup-Supplier-91182,China,Secondary,2.09,0.896,,,8
+1183,Supplier-1183,Japan,Primary,3.95,0.727,91183.0,0.164,20
+91183,Backup-Supplier-91183,Japan,Secondary,4.08,0.82,,,6
+1185,Supplier-1185,Japan,Primary,3.56,0.647,91185.0,0.12,15
+91185,Backup-Supplier-91185,Japan,Secondary,2.4,0.721,,,4
+1187,Supplier-1187,Vietnam,Primary,3.22,0.865,91187.0,0.099,2
+91187,Backup-Supplier-91187,Vietnam,Secondary,3.93,0.89,,,7
+1189,Supplier-1189,Brazil,Primary,2.31,0.76,91189.0,0.105,2
+91189,Backup-Supplier-91189,Brazil,Secondary,3.26,0.658,,,10
+1190,Supplier-1190,Japan,Primary,3.39,0.9,91190.0,0.089,19
+91190,Backup-Supplier-91190,Japan,Secondary,3.36,0.845,,,3
+1192,Supplier-1192,Bangladesh,Primary,4.51,0.784,91192.0,0.137,11
+91192,Backup-Supplier-91192,Bangladesh,Secondary,2.41,0.827,,,10
+1193,Supplier-1193,Brazil,Primary,3.98,0.701,91193.0,0.068,14
+91193,Backup-Supplier-91193,Brazil,Secondary,2.19,0.671,,,10
+1194,Supplier-1194,Vietnam,Primary,3.96,0.901,91194.0,0.177,13
+91194,Backup-Supplier-91194,Vietnam,Secondary,3.96,1.0,,,7
+1195,Supplier-1195,South Korea,Primary,3.32,0.903,91195.0,0.055,9
+91195,Backup-Supplier-91195,South Korea,Secondary,2.78,1.0,,,8
+1197,Supplier-1197,South Korea,Primary,3.36,0.952,91197.0,0.167,10
+91197,Backup-Supplier-91197,South Korea,Secondary,3.89,0.645,,,9
+1200,Supplier-1200,Brazil,Primary,4.95,0.907,91200.0,0.12,9
+91200,Backup-Supplier-91200,Brazil,Secondary,3.21,0.77,,,6
+1201,Supplier-1201,USA,Primary,4.35,0.687,91201.0,0.09,10
+91201,Backup-Supplier-91201,USA,Secondary,3.76,0.665,,,11
+1202,Supplier-1202,USA,Primary,4.55,0.956,91202.0,0.158,15
+91202,Backup-Supplier-91202,USA,Secondary,3.78,0.607,,,7
+1203,Supplier-1203,South Korea,Primary,4.02,0.916,91203.0,0.121,13
+91203,Backup-Supplier-91203,South Korea,Secondary,4.53,0.947,,,2
+1204,Supplier-1204,Brazil,Primary,3.61,0.844,91204.0,0.097,12
+91204,Backup-Supplier-91204,Brazil,Secondary,4.37,0.67,,,9
+1205,Supplier-1205,South Korea,Primary,3.25,0.793,91205.0,0.13,9
+91205,Backup-Supplier-91205,South Korea,Secondary,3.82,0.575,,,13
+1209,Supplier-1209,Mexico,Primary,4.16,0.842,91209.0,0.172,6
+91209,Backup-Supplier-91209,Mexico,Secondary,4.33,0.761,,,7
+1211,Supplier-1211,China,Primary,3.51,0.802,91211.0,0.124,13
+91211,Backup-Supplier-91211,China,Secondary,3.96,0.799,,,9
+1212,Supplier-1212,Vietnam,Primary,3.55,1.0,91212.0,0.162,17
+91212,Backup-Supplier-91212,Vietnam,Secondary,4.46,0.698,,,14
+1213,Supplier-1213,USA,Primary,4.4,0.957,91213.0,0.099,11
+91213,Backup-Supplier-91213,USA,Secondary,3.35,0.847,,,12
+1214,Supplier-1214,China,Primary,3.91,0.769,91214.0,0.107,15
+91214,Backup-Supplier-91214,China,Secondary,3.96,0.889,,,7
+1215,Supplier-1215,Mexico,Primary,3.24,0.773,91215.0,0.115,12
+91215,Backup-Supplier-91215,Mexico,Secondary,3.44,0.747,,,2
+1216,Supplier-1216,Bangladesh,Primary,3.05,0.972,91216.0,0.105,13
+91216,Backup-Supplier-91216,Bangladesh,Secondary,2.53,0.973,,,7
+1219,Supplier-1219,Mexico,Primary,3.97,1.0,91219.0,0.111,10
+91219,Backup-Supplier-91219,Mexico,Secondary,3.08,0.761,,,9
+1222,Supplier-1222,Mexico,Primary,3.74,0.82,91222.0,0.106,11
+91222,Backup-Supplier-91222,Mexico,Secondary,5.0,0.811,,,13
+1225,Supplier-1225,India,Primary,4.01,0.956,91225.0,0.175,8
+91225,Backup-Supplier-91225,India,Secondary,3.82,0.919,,,8
+1226,Supplier-1226,Brazil,Primary,3.03,0.724,91226.0,0.078,4
+91226,Backup-Supplier-91226,Brazil,Secondary,3.58,0.935,,,7
+1228,Supplier-1228,Germany,Primary,2.44,0.841,91228.0,0.085,20
+91228,Backup-Supplier-91228,Germany,Secondary,2.48,0.753,,,13
+1230,Supplier-1230,USA,Primary,4.07,0.916,91230.0,0.165,13
+91230,Backup-Supplier-91230,USA,Secondary,4.04,0.703,,,10
+1231,Supplier-1231,China,Primary,2.98,0.893,91231.0,0.086,9
+91231,Backup-Supplier-91231,China,Secondary,3.48,0.725,,,4
+1232,Supplier-1232,Vietnam,Primary,3.59,0.75,91232.0,0.152,7
+91232,Backup-Supplier-91232,Vietnam,Secondary,4.0,0.658,,,6
+1233,Supplier-1233,Japan,Primary,3.43,0.993,91233.0,0.073,11
+91233,Backup-Supplier-91233,Japan,Secondary,3.85,0.547,,,7
+1235,Supplier-1235,South Korea,Primary,5.0,0.873,91235.0,0.067,14
+91235,Backup-Supplier-91235,South Korea,Secondary,4.13,0.56,,,2
+1236,Supplier-1236,Mexico,Primary,3.93,0.789,91236.0,0.115,10
+91236,Backup-Supplier-91236,Mexico,Secondary,2.15,0.648,,,2
+1237,Supplier-1237,Mexico,Primary,3.66,0.841,91237.0,0.153,16
+91237,Backup-Supplier-91237,Mexico,Secondary,4.34,0.78,,,2
+1239,Supplier-1239,Vietnam,Primary,4.17,0.916,91239.0,0.124,15
+91239,Backup-Supplier-91239,Vietnam,Secondary,2.68,1.0,,,5
+1240,Supplier-1240,Germany,Primary,4.25,0.691,91240.0,0.179,18
+91240,Backup-Supplier-91240,Germany,Secondary,3.32,0.901,,,8
+1241,Supplier-1241,China,Primary,3.74,0.996,91241.0,0.172,4
+91241,Backup-Supplier-91241,China,Secondary,2.94,0.866,,,9
+1243,Supplier-1243,USA,Primary,2.86,0.788,91243.0,0.173,10
+91243,Backup-Supplier-91243,USA,Secondary,2.54,0.725,,,5
+1244,Supplier-1244,Japan,Primary,4.26,0.941,91244.0,0.084,10
+91244,Backup-Supplier-91244,Japan,Secondary,3.6,0.702,,,4
+1245,Supplier-1245,South Korea,Primary,3.24,0.797,91245.0,0.175,12
+91245,Backup-Supplier-91245,South Korea,Secondary,4.01,0.61,,,8
+1247,Supplier-1247,Vietnam,Primary,3.67,0.894,91247.0,0.099,6
+91247,Backup-Supplier-91247,Vietnam,Secondary,2.62,0.804,,,11
+1250,Supplier-1250,Brazil,Primary,2.47,0.895,91250.0,0.077,11
+91250,Backup-Supplier-91250,Brazil,Secondary,3.89,0.716,,,7
+1251,Supplier-1251,Mexico,Primary,2.83,0.626,91251.0,0.075,8
+91251,Backup-Supplier-91251,Mexico,Secondary,3.18,0.634,,,3
+1252,Supplier-1252,Bangladesh,Primary,3.7,0.787,91252.0,0.178,13
+91252,Backup-Supplier-91252,Bangladesh,Secondary,3.72,0.829,,,12
+1258,Supplier-1258,Vietnam,Primary,3.16,0.855,91258.0,0.063,17
+91258,Backup-Supplier-91258,Vietnam,Secondary,2.5,0.763,,,12
+1259,Supplier-1259,South Korea,Primary,4.1,0.88,91259.0,0.168,10
+91259,Backup-Supplier-91259,South Korea,Secondary,3.7,0.77,,,7
+1261,Supplier-1261,South Korea,Primary,3.85,0.792,91261.0,0.102,23
+91261,Backup-Supplier-91261,South Korea,Secondary,2.26,0.839,,,5
+1263,Supplier-1263,Mexico,Primary,4.15,0.865,91263.0,0.152,16
+91263,Backup-Supplier-91263,Mexico,Secondary,3.63,0.936,,,2
+1264,Supplier-1264,Bangladesh,Primary,4.75,0.898,91264.0,0.163,7
+91264,Backup-Supplier-91264,Bangladesh,Secondary,2.92,0.818,,,7
+1267,Supplier-1267,Germany,Primary,3.97,0.968,91267.0,0.145,15
+91267,Backup-Supplier-91267,Germany,Secondary,3.51,0.776,,,3
+1278,Supplier-1278,Mexico,Primary,4.1,0.619,91278.0,0.065,6
+91278,Backup-Supplier-91278,Mexico,Secondary,3.54,0.786,,,11
+1279,Supplier-1279,Bangladesh,Primary,3.69,0.791,91279.0,0.169,17
+91279,Backup-Supplier-91279,Bangladesh,Secondary,3.88,0.754,,,7
+1280,Supplier-1280,Mexico,Primary,2.86,0.899,91280.0,0.175,15
+91280,Backup-Supplier-91280,Mexico,Secondary,3.59,1.0,,,4
+1286,Supplier-1286,South Korea,Primary,3.74,1.0,91286.0,0.178,9
+91286,Backup-Supplier-91286,South Korea,Secondary,3.66,0.8,,,8
+1287,Supplier-1287,USA,Primary,3.38,0.851,91287.0,0.177,12
+91287,Backup-Supplier-91287,USA,Secondary,3.82,0.773,,,3
+1288,Supplier-1288,South Korea,Primary,4.39,0.896,91288.0,0.158,10
+91288,Backup-Supplier-91288,South Korea,Secondary,2.45,0.677,,,6
+1291,Supplier-1291,India,Primary,4.54,0.796,91291.0,0.095,9
+91291,Backup-Supplier-91291,India,Secondary,3.67,0.783,,,10
+1295,Supplier-1295,USA,Primary,3.48,0.703,91295.0,0.163,9
+91295,Backup-Supplier-91295,USA,Secondary,2.63,0.849,,,6
+1296,Supplier-1296,Germany,Primary,5.0,0.686,91296.0,0.054,7
+91296,Backup-Supplier-91296,Germany,Secondary,3.15,0.817,,,2
+1297,Supplier-1297,Vietnam,Primary,3.94,1.0,91297.0,0.108,13
+91297,Backup-Supplier-91297,Vietnam,Secondary,4.22,0.78,,,6
+1298,Supplier-1298,Mexico,Primary,2.43,0.924,91298.0,0.068,7
+91298,Backup-Supplier-91298,Mexico,Secondary,3.59,0.73,,,6
+1299,Supplier-1299,Japan,Primary,4.16,0.726,91299.0,0.062,6
+91299,Backup-Supplier-91299,Japan,Secondary,3.04,1.0,,,11
+1300,Supplier-1300,China,Primary,3.86,0.766,91300.0,0.125,12
+91300,Backup-Supplier-91300,China,Secondary,3.53,0.789,,,7
+1303,Supplier-1303,South Korea,Primary,3.67,0.716,91303.0,0.108,15
+91303,Backup-Supplier-91303,South Korea,Secondary,2.54,0.777,,,5
+1305,Supplier-1305,Brazil,Primary,3.87,0.821,91305.0,0.082,14
+91305,Backup-Supplier-91305,Brazil,Secondary,2.58,0.881,,,5
+1308,Supplier-1308,Mexico,Primary,3.45,0.891,91308.0,0.09,15
+91308,Backup-Supplier-91308,Mexico,Secondary,2.96,0.726,,,6
+1310,Supplier-1310,Japan,Primary,3.46,0.97,91310.0,0.122,18
+91310,Backup-Supplier-91310,Japan,Secondary,5.0,0.676,,,8
+1313,Supplier-1313,India,Primary,3.09,0.782,91313.0,0.139,7
+91313,Backup-Supplier-91313,India,Secondary,2.76,0.783,,,4
+1315,Supplier-1315,India,Primary,4.31,0.768,91315.0,0.147,10
+91315,Backup-Supplier-91315,India,Secondary,3.55,0.645,,,13
+1317,Supplier-1317,Germany,Primary,4.47,0.89,91317.0,0.114,12
+91317,Backup-Supplier-91317,Germany,Secondary,2.71,0.975,,,10
+1318,Supplier-1318,India,Primary,3.86,0.616,91318.0,0.17,14
+91318,Backup-Supplier-91318,India,Secondary,4.35,0.933,,,3
+1319,Supplier-1319,South Korea,Primary,3.98,0.962,91319.0,0.062,11
+91319,Backup-Supplier-91319,South Korea,Secondary,3.69,0.764,,,2
+1320,Supplier-1320,Vietnam,Primary,3.6,0.827,91320.0,0.07,9
+91320,Backup-Supplier-91320,Vietnam,Secondary,3.19,0.795,,,9
+1321,Supplier-1321,India,Primary,3.62,0.819,91321.0,0.149,4
+91321,Backup-Supplier-91321,India,Secondary,3.83,0.8,,,8
+1322,Supplier-1322,China,Primary,4.38,0.665,91322.0,0.079,13
+91322,Backup-Supplier-91322,China,Secondary,3.5,0.82,,,6
+1323,Supplier-1323,Vietnam,Primary,4.2,0.953,91323.0,0.118,10
+91323,Backup-Supplier-91323,Vietnam,Secondary,2.02,0.892,,,11
+1325,Supplier-1325,South Korea,Primary,4.19,0.772,91325.0,0.089,15
+91325,Backup-Supplier-91325,South Korea,Secondary,4.59,0.695,,,7
+1326,Supplier-1326,Brazil,Primary,4.25,0.866,91326.0,0.092,13
+91326,Backup-Supplier-91326,Brazil,Secondary,3.91,0.811,,,8
+1329,Supplier-1329,Japan,Primary,3.64,1.0,91329.0,0.093,9
+91329,Backup-Supplier-91329,Japan,Secondary,3.51,0.905,,,3
+1332,Supplier-1332,China,Primary,3.01,0.656,91332.0,0.149,7
+91332,Backup-Supplier-91332,China,Secondary,3.23,0.879,,,6
+1333,Supplier-1333,Vietnam,Primary,3.94,0.83,91333.0,0.058,13
+91333,Backup-Supplier-91333,Vietnam,Secondary,3.02,0.78,,,11
+1334,Supplier-1334,India,Primary,4.04,0.72,91334.0,0.108,7
+91334,Backup-Supplier-91334,India,Secondary,4.49,0.923,,,8
+1337,Supplier-1337,Vietnam,Primary,3.89,0.839,91337.0,0.168,10
+91337,Backup-Supplier-91337,Vietnam,Secondary,3.66,0.905,,,6
+1338,Supplier-1338,Brazil,Primary,3.43,0.741,91338.0,0.174,4
+91338,Backup-Supplier-91338,Brazil,Secondary,4.01,1.0,,,12
+1341,Supplier-1341,Germany,Primary,2.82,0.932,91341.0,0.096,10
+91341,Backup-Supplier-91341,Germany,Secondary,3.57,0.559,,,8
+1342,Supplier-1342,Germany,Primary,3.16,0.88,91342.0,0.155,14
+91342,Backup-Supplier-91342,Germany,Secondary,4.22,0.706,,,4
+1343,Supplier-1343,USA,Primary,2.51,0.833,91343.0,0.079,5
+91343,Backup-Supplier-91343,USA,Secondary,3.82,0.746,,,4
+1349,Supplier-1349,South Korea,Primary,3.47,0.967,91349.0,0.171,11
+91349,Backup-Supplier-91349,South Korea,Secondary,3.93,0.661,,,8
+1350,Supplier-1350,Vietnam,Primary,3.89,0.813,91350.0,0.168,8
+91350,Backup-Supplier-91350,Vietnam,Secondary,3.86,0.866,,,2
+1351,Supplier-1351,Vietnam,Primary,4.51,0.555,91351.0,0.104,16
+91351,Backup-Supplier-91351,Vietnam,Secondary,3.28,0.624,,,4
+1352,Supplier-1352,South Korea,Primary,4.42,0.668,91352.0,0.111,11
+91352,Backup-Supplier-91352,South Korea,Secondary,2.67,0.73,,,4
+1353,Supplier-1353,Bangladesh,Primary,4.32,0.933,91353.0,0.079,10
+91353,Backup-Supplier-91353,Bangladesh,Secondary,2.9,0.955,,,3
+1358,Supplier-1358,Mexico,Primary,4.76,0.857,91358.0,0.161,9
+91358,Backup-Supplier-91358,Mexico,Secondary,2.94,0.647,,,8
+1359,Supplier-1359,Japan,Primary,3.06,0.642,91359.0,0.07,4
+91359,Backup-Supplier-91359,Japan,Secondary,2.97,0.691,,,5
+1360,Supplier-1360,Germany,Primary,5.0,0.866,91360.0,0.087,4
+91360,Backup-Supplier-91360,Germany,Secondary,3.04,0.826,,,4
+1362,Supplier-1362,Germany,Primary,4.34,0.74,91362.0,0.135,9
+91362,Backup-Supplier-91362,Germany,Secondary,3.62,0.723,,,7
+1363,Supplier-1363,Brazil,Primary,3.66,0.787,91363.0,0.056,12
+91363,Backup-Supplier-91363,Brazil,Secondary,3.44,0.748,,,10
+1364,Supplier-1364,Bangladesh,Primary,3.66,0.829,91364.0,0.054,18
+91364,Backup-Supplier-91364,Bangladesh,Secondary,2.56,0.892,,,2
+1366,Supplier-1366,USA,Primary,3.93,1.0,91366.0,0.109,12
+91366,Backup-Supplier-91366,USA,Secondary,3.11,0.804,,,7
+1367,Supplier-1367,Vietnam,Primary,3.33,0.831,91367.0,0.117,8
+91367,Backup-Supplier-91367,Vietnam,Secondary,2.94,0.637,,,9
+1369,Supplier-1369,South Korea,Primary,4.13,0.883,91369.0,0.128,12
+91369,Backup-Supplier-91369,South Korea,Secondary,3.77,0.836,,,7
+1370,Supplier-1370,Brazil,Primary,3.48,1.0,91370.0,0.056,9
+91370,Backup-Supplier-91370,Brazil,Secondary,3.8,0.83,,,3
+1371,Supplier-1371,Bangladesh,Primary,4.47,0.851,91371.0,0.109,16
+91371,Backup-Supplier-91371,Bangladesh,Secondary,3.94,0.648,,,13
+1372,Supplier-1372,Brazil,Primary,4.2,0.859,91372.0,0.173,12
+91372,Backup-Supplier-91372,Brazil,Secondary,3.48,0.721,,,9
+1374,Supplier-1374,Mexico,Primary,4.09,0.861,91374.0,0.176,12
+91374,Backup-Supplier-91374,Mexico,Secondary,3.45,0.64,,,3
+1375,Supplier-1375,Vietnam,Primary,4.14,0.6,91375.0,0.101,10
+91375,Backup-Supplier-91375,Vietnam,Secondary,4.42,0.741,,,9
+1376,Supplier-1376,Bangladesh,Primary,3.56,0.871,91376.0,0.076,10
+91376,Backup-Supplier-91376,Bangladesh,Secondary,4.2,0.681,,,8
+1377,Supplier-1377,Japan,Primary,4.35,0.926,91377.0,0.143,8
+91377,Backup-Supplier-91377,Japan,Secondary,2.53,0.681,,,9
+1378,Supplier-1378,Bangladesh,Primary,4.1,0.87,91378.0,0.095,15
+91378,Backup-Supplier-91378,Bangladesh,Secondary,2.64,0.939,,,16
+1379,Supplier-1379,Bangladesh,Primary,4.02,0.918,91379.0,0.172,4
+91379,Backup-Supplier-91379,Bangladesh,Secondary,3.08,0.669,,,3
+1384,Supplier-1384,Vietnam,Primary,4.83,0.887,91384.0,0.117,10
+91384,Backup-Supplier-91384,Vietnam,Secondary,3.38,0.916,,,7
+1386,Supplier-1386,India,Primary,4.12,0.84,91386.0,0.055,6
+91386,Backup-Supplier-91386,India,Secondary,2.12,0.769,,,8
+1387,Supplier-1387,USA,Primary,3.03,0.857,91387.0,0.1,3
+91387,Backup-Supplier-91387,USA,Secondary,2.86,0.849,,,9
+1388,Supplier-1388,Germany,Primary,3.11,0.876,91388.0,0.179,15
+91388,Backup-Supplier-91388,Germany,Secondary,3.43,0.744,,,6
+1389,Supplier-1389,Bangladesh,Primary,4.08,0.88,91389.0,0.16,12
+91389,Backup-Supplier-91389,Bangladesh,Secondary,4.07,0.811,,,10
+1390,Supplier-1390,Mexico,Primary,4.32,0.78,91390.0,0.062,18
+91390,Backup-Supplier-91390,Mexico,Secondary,3.68,0.594,,,5
+1393,Supplier-1393,India,Primary,4.26,0.832,91393.0,0.154,17
+91393,Backup-Supplier-91393,India,Secondary,2.77,0.704,,,8
+1394,Supplier-1394,USA,Primary,4.03,0.91,91394.0,0.108,12
+91394,Backup-Supplier-91394,USA,Secondary,3.84,0.769,,,8
+1397,Supplier-1397,USA,Primary,3.86,0.882,91397.0,0.105,14
+91397,Backup-Supplier-91397,USA,Secondary,3.53,0.703,,,8
+1399,Supplier-1399,India,Primary,3.78,0.879,91399.0,0.096,9
+91399,Backup-Supplier-91399,India,Secondary,3.8,0.928,,,8
+1400,Supplier-1400,Mexico,Primary,5.0,0.822,91400.0,0.176,8
+91400,Backup-Supplier-91400,Mexico,Secondary,3.25,0.83,,,10
+1402,Supplier-1402,USA,Primary,3.99,0.986,91402.0,0.084,10
+91402,Backup-Supplier-91402,USA,Secondary,5.0,0.847,,,5
+1403,Supplier-1403,China,Primary,3.38,0.766,91403.0,0.156,10
+91403,Backup-Supplier-91403,China,Secondary,3.59,0.792,,,10
+1407,Supplier-1407,Brazil,Primary,3.29,0.752,91407.0,0.166,14
+91407,Backup-Supplier-91407,Brazil,Secondary,3.73,0.703,,,10
+1409,Supplier-1409,South Korea,Primary,3.35,0.808,91409.0,0.064,17
+91409,Backup-Supplier-91409,South Korea,Secondary,3.94,0.873,,,11
+1420,Supplier-1420,Brazil,Primary,5.0,0.689,91420.0,0.173,9
+91420,Backup-Supplier-91420,Brazil,Secondary,2.9,0.671,,,7
+1422,Supplier-1422,India,Primary,3.07,0.894,91422.0,0.083,13
+91422,Backup-Supplier-91422,India,Secondary,3.86,0.872,,,6
+1423,Supplier-1423,Germany,Primary,5.0,0.883,91423.0,0.062,7
+91423,Backup-Supplier-91423,Germany,Secondary,2.28,0.802,,,7
+1425,Supplier-1425,Germany,Primary,3.52,1.0,91425.0,0.12,14
+91425,Backup-Supplier-91425,Germany,Secondary,2.85,0.68,,,8
+1427,Supplier-1427,USA,Primary,3.9,0.674,91427.0,0.084,12
+91427,Backup-Supplier-91427,USA,Secondary,3.35,0.702,,,6
+1428,Supplier-1428,Mexico,Primary,3.69,0.869,91428.0,0.126,16
+91428,Backup-Supplier-91428,Mexico,Secondary,3.29,0.745,,,9
+1429,Supplier-1429,Japan,Primary,4.17,0.817,91429.0,0.141,15
+91429,Backup-Supplier-91429,Japan,Secondary,4.4,1.0,,,5
+1431,Supplier-1431,Mexico,Primary,3.81,0.861,91431.0,0.116,9
+91431,Backup-Supplier-91431,Mexico,Secondary,2.46,0.811,,,5
+1435,Supplier-1435,Brazil,Primary,3.85,0.781,91435.0,0.163,12
+91435,Backup-Supplier-91435,Brazil,Secondary,3.61,0.87,,,14
+1437,Supplier-1437,India,Primary,3.97,0.909,91437.0,0.074,6
+91437,Backup-Supplier-91437,India,Secondary,4.61,0.689,,,4
+1439,Supplier-1439,India,Primary,3.78,0.851,91439.0,0.076,10
+91439,Backup-Supplier-91439,India,Secondary,4.36,0.703,,,3
+1440,Supplier-1440,South Korea,Primary,4.37,0.909,91440.0,0.055,5
+91440,Backup-Supplier-91440,South Korea,Secondary,2.98,0.793,,,11
+1441,Supplier-1441,Japan,Primary,3.18,0.852,91441.0,0.111,2
+91441,Backup-Supplier-91441,Japan,Secondary,4.22,0.658,,,8
+1442,Supplier-1442,Brazil,Primary,3.95,0.968,91442.0,0.167,2
+91442,Backup-Supplier-91442,Brazil,Secondary,2.95,0.817,,,7
+1443,Supplier-1443,South Korea,Primary,4.09,0.939,91443.0,0.073,11
+91443,Backup-Supplier-91443,South Korea,Secondary,2.21,0.745,,,9
+1445,Supplier-1445,USA,Primary,3.15,0.923,91445.0,0.06,12
+91445,Backup-Supplier-91445,USA,Secondary,1.36,0.647,,,13
+1447,Supplier-1447,USA,Primary,3.47,0.662,91447.0,0.125,12
+91447,Backup-Supplier-91447,USA,Secondary,4.27,0.833,,,9
+1448,Supplier-1448,USA,Primary,4.02,0.93,91448.0,0.098,15
+91448,Backup-Supplier-91448,USA,Secondary,2.39,0.854,,,11
+1449,Supplier-1449,Brazil,Primary,4.52,0.817,91449.0,0.144,15
+91449,Backup-Supplier-91449,Brazil,Secondary,5.0,0.71,,,6
+1451,Supplier-1451,China,Primary,3.62,0.811,91451.0,0.161,2
+91451,Backup-Supplier-91451,China,Secondary,3.2,0.844,,,6
+1453,Supplier-1453,South Korea,Primary,4.96,0.861,91453.0,0.179,13
+91453,Backup-Supplier-91453,South Korea,Secondary,4.08,0.834,,,12
+1455,Supplier-1455,Bangladesh,Primary,3.83,0.91,91455.0,0.139,10
+91455,Backup-Supplier-91455,Bangladesh,Secondary,3.78,1.0,,,7
+1456,Supplier-1456,Mexico,Primary,4.05,0.986,91456.0,0.09,12
+91456,Backup-Supplier-91456,Mexico,Secondary,1.83,0.862,,,2
+1459,Supplier-1459,USA,Primary,4.68,0.877,91459.0,0.14,8
+91459,Backup-Supplier-91459,USA,Secondary,2.41,0.831,,,7
+1460,Supplier-1460,USA,Primary,3.51,0.868,91460.0,0.178,15
+91460,Backup-Supplier-91460,USA,Secondary,4.23,0.901,,,12
+1461,Supplier-1461,Japan,Primary,3.69,0.655,91461.0,0.051,15
+91461,Backup-Supplier-91461,Japan,Secondary,2.82,0.779,,,5
+1462,Supplier-1462,China,Primary,4.7,0.935,91462.0,0.128,14
+91462,Backup-Supplier-91462,China,Secondary,3.47,0.824,,,4
+1464,Supplier-1464,China,Primary,2.49,0.875,91464.0,0.089,16
+91464,Backup-Supplier-91464,China,Secondary,4.6,0.988,,,5
+1465,Supplier-1465,Brazil,Primary,3.59,0.908,91465.0,0.113,17
+91465,Backup-Supplier-91465,Brazil,Secondary,4.28,0.753,,,5
+1466,Supplier-1466,Germany,Primary,4.27,0.75,91466.0,0.076,11
+91466,Backup-Supplier-91466,Germany,Secondary,4.62,0.757,,,2
+1468,Supplier-1468,Mexico,Primary,4.1,0.79,91468.0,0.132,11
+91468,Backup-Supplier-91468,Mexico,Secondary,3.31,0.895,,,3
+1469,Supplier-1469,Mexico,Primary,3.49,0.928,91469.0,0.174,5
+91469,Backup-Supplier-91469,Mexico,Secondary,3.97,0.935,,,7
+1470,Supplier-1470,Vietnam,Primary,2.62,0.931,91470.0,0.076,13
+91470,Backup-Supplier-91470,Vietnam,Secondary,2.88,0.661,,,6
+1471,Supplier-1471,Brazil,Primary,3.69,0.796,91471.0,0.126,10
+91471,Backup-Supplier-91471,Brazil,Secondary,4.19,0.834,,,5
+1472,Supplier-1472,Vietnam,Primary,3.28,0.695,91472.0,0.086,10
+91472,Backup-Supplier-91472,Vietnam,Secondary,1.84,0.736,,,5
+1473,Supplier-1473,South Korea,Primary,4.75,0.69,91473.0,0.145,16
+91473,Backup-Supplier-91473,South Korea,Secondary,4.45,0.711,,,6
+1475,Supplier-1475,Japan,Primary,4.17,0.627,91475.0,0.144,10
+91475,Backup-Supplier-91475,Japan,Secondary,4.58,0.748,,,8
+1479,Supplier-1479,Germany,Primary,4.48,1.0,91479.0,0.173,11
+91479,Backup-Supplier-91479,Germany,Secondary,4.78,0.617,,,11
+1480,Supplier-1480,Vietnam,Primary,3.19,0.87,91480.0,0.15,8
+91480,Backup-Supplier-91480,Vietnam,Secondary,2.81,0.833,,,10
+1482,Supplier-1482,Germany,Primary,3.72,0.867,91482.0,0.118,8
+91482,Backup-Supplier-91482,Germany,Secondary,4.02,0.898,,,15
+1486,Supplier-1486,South Korea,Primary,3.57,0.814,91486.0,0.174,15
+91486,Backup-Supplier-91486,South Korea,Secondary,3.13,0.752,,,9
+1487,Supplier-1487,Bangladesh,Primary,3.3,0.819,91487.0,0.134,15
+91487,Backup-Supplier-91487,Bangladesh,Secondary,3.08,0.579,,,2
+1490,Supplier-1490,South Korea,Primary,3.04,0.729,91490.0,0.069,7
+91490,Backup-Supplier-91490,South Korea,Secondary,3.01,0.707,,,6
+1491,Supplier-1491,Brazil,Primary,4.59,0.926,91491.0,0.131,10
+91491,Backup-Supplier-91491,Brazil,Secondary,3.2,0.839,,,9
+1492,Supplier-1492,Germany,Primary,3.26,0.864,91492.0,0.131,12
+91492,Backup-Supplier-91492,Germany,Secondary,4.03,0.766,,,13
+1493,Supplier-1493,Bangladesh,Primary,3.27,0.882,91493.0,0.099,11
+91493,Backup-Supplier-91493,Bangladesh,Secondary,3.42,0.813,,,10
+1494,Supplier-1494,India,Primary,4.63,0.86,91494.0,0.176,9
+91494,Backup-Supplier-91494,India,Secondary,4.04,0.709,,,11
+1495,Supplier-1495,Japan,Primary,5.0,0.848,91495.0,0.174,9
+91495,Backup-Supplier-91495,Japan,Secondary,4.36,0.866,,,8
+1497,Supplier-1497,USA,Primary,4.41,0.908,91497.0,0.13,15
+91497,Backup-Supplier-91497,USA,Secondary,4.57,0.843,,,10
+1499,Supplier-1499,Mexico,Primary,3.62,0.8,91499.0,0.063,12
+91499,Backup-Supplier-91499,Mexico,Secondary,4.06,0.815,,,6

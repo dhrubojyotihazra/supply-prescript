@@ -41,7 +41,7 @@ RANDOM_SEED = 42
 
 # Columns that must never be used as model features (identifiers, raw dates,
 # or the label itself).
-ID_AND_LEAKAGE_COLUMNS = ["Shipment_ID", "Supplier_ID", "Order_Date"]
+ID_AND_LEAKAGE_COLUMNS = ["Shipment_ID", "Supplier_ID", "Order_Date", "Lead_Time"]
 TARGET_COLUMN = "Delay"
 
 # Ordinal categorical -> explicit ordering used for label encoding so that
@@ -60,7 +60,7 @@ NOMINAL_COLUMNS = [
 
 # Continuous numeric columns eligible for outlier clipping and scaling.
 NUMERIC_COLUMNS = [
-    "Supplier_Rating", "Lead_Time", "Expected_Lead_Time", "Historical_Delay_Count",
+    "Supplier_Rating", "Expected_Lead_Time", "Historical_Delay_Count",
     "Inventory_Level", "Inventory_Days", "Demand_Forecast", "Weather_Severity",
     "Traffic_Index", "Fuel_Price", "Port_Congestion", "Distance",
     "Transportation_Cost", "Purchase_Order_Value", "Vehicle_Availability",
@@ -69,6 +69,12 @@ NUMERIC_COLUMNS = [
     "Supplier_OnTime_Rate", "Late_Delivery_Cost", "Market_Demand_Index",
     "Geopolitical_Risk", "Economic_Index",
 ]
+# NOTE: 'Lead_Time' (the shipment's ACTUAL realized transit time) is
+# deliberately excluded. It is only known after the shipment completes and
+# is the quantity used to define the 'Delay' label itself, so including it
+# as a model input would be target leakage — the model would essentially be
+# handed the answer. Only 'Expected_Lead_Time' (the planned/quoted time,
+# known in advance) is a legitimate pre-shipment feature.
 
 BINARY_COLUMNS = ["Holiday_Impact", "Temperature_Sensitive", "Fragile"]
 
@@ -188,10 +194,15 @@ class PreprocessingPipeline:
 
     @staticmethod
     def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
-        """Create additional ratio/interaction features with business meaning."""
+        """
+        Create additional ratio/interaction features with business meaning.
+
+        NOTE: features are deliberately built only from quantities knowable
+        BEFORE a shipment completes (Expected_Lead_Time, current risk/
+        congestion readings, supplier history) to avoid leaking the actual
+        realized Lead_Time, which is what the 'Delay' label is derived from.
+        """
         df = df.copy()
-        df["Lead_Time_Deviation"] = df["Lead_Time"] - df["Expected_Lead_Time"]
-        df["Lead_Time_Deviation_Ratio"] = df["Lead_Time_Deviation"] / (df["Expected_Lead_Time"] + 1e-3)
         df["Risk_Composite_Index"] = (
             df["Weather_Severity"] + df["Port_Congestion"] + df["Route_Risk"] + df["Geopolitical_Risk"]
         ) / 4.0
@@ -199,7 +210,7 @@ class PreprocessingPipeline:
         df["Supplier_Reliability_Score"] = (
             df["Supplier_Rating"] / 5.0 * 0.5 + df["Supplier_OnTime_Rate"] * 0.5
         )
-        logger.info("Engineered 5 additional derived features.")
+        logger.info("Engineered 3 additional derived features (leakage-free).")
         return df
 
     def encode_ordinal(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -220,8 +231,7 @@ class PreprocessingPipeline:
         """Standardize numeric feature columns using StandardScaler."""
         df = df.copy()
         engineered_numeric = [
-            "Lead_Time_Deviation", "Lead_Time_Deviation_Ratio", "Risk_Composite_Index",
-            "Cost_Per_Kg", "Supplier_Reliability_Score",
+            "Risk_Composite_Index", "Cost_Per_Kg", "Supplier_Reliability_Score",
         ]
         scale_cols = [c for c in NUMERIC_COLUMNS + engineered_numeric if c in df.columns]
 

@@ -1,0 +1,26 @@
+{
+  "total_shipments_evaluated": 400,
+  "tier_distribution": {
+    "NO_ACTION_REQUIRED": 205,
+    "FULL_OPTIMIZATION": 167,
+    "LOW_COST_MITIGATION": 28
+  },
+  "recommended_action_distribution": {
+    "No_Action_Required": 205,
+    "Delay_Launch": 120,
+    "Expedite_Manufacturing": 15,
+    "Rail_Freight": 15,
+    "Use_Safety_Stock": 14,
+    "Secondary_Supplier": 13,
+    "Air_Freight": 12,
+    "Sea_Freight": 6
+  },
+  "total_estimated_cost_usd": 117056.84,
+  "total_business_impact_usd": 100275.58,
+  "average_delay_probability": 0.4766,
+  "average_expected_delay_days_after_action": 4.42,
+  "joint_milp_status": "Optimal",
+  "joint_milp_solver_time_seconds": 0.0843,
+  "budget_usd": 500000.0,
+  "carbon_limit_kg": 250000.0
+}

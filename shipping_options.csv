@@ -1,0 +1,393 @@
+Origin_Country,Destination_Country,Mode,Transit_Days,Weekly_Capacity_Kg,Available
+China,India,Air,1.2,7300,True
+China,India,Sea,38.1,52042,True
+China,India,Rail,1.0,48945,True
+China,India,Road,10.3,27083,True
+USA,Netherlands,Air,0.7,10860,True
+USA,Netherlands,Sea,30.0,36264,True
+USA,Netherlands,Rail,8.7,19309,True
+USA,Netherlands,Road,11.8,28299,True
+Mexico,India,Air,5.3,11032,True
+Mexico,India,Sea,13.6,46655,True
+Mexico,India,Rail,4.5,48656,True
+Mexico,India,Road,2.0,45420,True
+Brazil,Netherlands,Air,2.4,13815,True
+Brazil,Netherlands,Sea,13.9,19000,True
+Brazil,Netherlands,Rail,9.6,19894,True
+Brazil,Netherlands,Road,5.9,59510,True
+Japan,Australia,Air,2.1,6317,True
+Japan,Australia,Sea,20.8,51703,True
+Japan,Australia,Rail,14.4,9913,True
+Japan,Australia,Road,5.5,5673,True
+Mexico,Canada,Air,0.5,4386,True
+Mexico,Canada,Sea,1.5,25574,True
+Mexico,Canada,Rail,10.0,8726,True
+Mexico,Canada,Road,10.3,22984,True
+Bangladesh,Canada,Air,2.7,13947,True
+Bangladesh,Canada,Sea,10.8,47514,True
+Bangladesh,Canada,Rail,11.0,18771,True
+Bangladesh,Canada,Road,3.2,7565,True
+India,USA,Air,4.3,11884,True
+India,USA,Sea,16.4,48251,True
+India,USA,Rail,11.1,16337,True
+India,USA,Road,7.5,46365,True
+South Korea,Germany,Air,1.6,10278,True
+South Korea,Germany,Sea,13.2,45240,True
+South Korea,Germany,Rail,14.9,23724,True
+South Korea,Germany,Road,8.8,21717,True
+Brazil,USA,Air,3.7,6640,True
+Brazil,USA,Sea,10.8,7445,True
+Brazil,USA,Rail,12.9,12907,True
+Brazil,USA,Road,7.4,59971,True
+South Korea,India,Air,2.4,2167,True
+South Korea,India,Sea,13.7,33210,True
+South Korea,India,Rail,6.9,28324,True
+South Korea,India,Road,3.1,59581,True
+Mexico,USA,Air,1.4,8517,True
+Mexico,USA,Sea,24.4,29677,True
+Mexico,USA,Rail,17.3,57020,True
+Mexico,USA,Road,6.7,37288,True
+Bangladesh,India,Air,1.8,5548,True
+Bangladesh,India,Sea,2.1,54076,True
+Bangladesh,India,Rail,11.3,44430,True
+Bangladesh,India,Road,6.1,33489,True
+Vietnam,India,Air,2.2,14534,True
+Vietnam,India,Sea,25.4,6954,True
+Vietnam,India,Rail,3.5,56994,True
+Vietnam,India,Road,12.8,20398,True
+Vietnam,France,Air,4.7,3095,True
+Vietnam,France,Sea,13.6,51193,True
+Vietnam,France,Rail,10.2,12637,True
+Vietnam,France,Road,1.9,25954,True
+Mexico,UK,Air,3.2,9592,True
+Mexico,UK,Sea,36.4,53149,True
+Mexico,UK,Rail,7.3,30970,True
+Mexico,UK,Road,2.3,24400,True
+India,UAE,Air,1.3,9773,True
+India,UAE,Sea,28.7,29099,True
+India,UAE,Rail,4.4,46958,True
+India,UAE,Road,1.9,32594,True
+Mexico,Germany,Air,2.5,5825,True
+Mexico,Germany,Sea,14.6,43462,True
+Mexico,Germany,Rail,7.4,19723,True
+Mexico,Germany,Road,4.3,38351,True
+Germany,Australia,Air,5.1,14210,True
+Germany,Australia,Sea,9.3,46668,True
+Germany,Australia,Rail,7.1,24367,True
+Germany,Australia,Road,3.1,50140,True
+Germany,Japan,Air,4.5,5116,True
+Germany,Japan,Sea,36.2,14792,True
+Germany,Japan,Rail,8.0,36063,True
+Germany,Japan,Road,8.3,5192,True
+China,UK,Air,0.5,6273,True
+China,UK,Sea,18.1,33253,True
+China,UK,Rail,14.6,27399,True
+China,UK,Road,2.7,28914,True
+Mexico,France,Air,4.4,13655,True
+Mexico,France,Sea,10.2,19706,True
+Mexico,France,Rail,9.2,35261,True
+Mexico,France,Road,11.1,5958,True
+Bangladesh,Netherlands,Air,3.2,6926,True
+Bangladesh,Netherlands,Sea,27.0,13792,True
+Bangladesh,Netherlands,Rail,13.0,38501,True
+Bangladesh,Netherlands,Road,10.8,52629,True
+USA,Germany,Air,3.5,5959,True
+USA,Germany,Sea,30.1,5555,True
+USA,Germany,Rail,8.0,28339,True
+USA,Germany,Road,11.7,33022,True
+China,UAE,Air,4.9,11398,True
+China,UAE,Sea,14.4,11896,True
+China,UAE,Rail,14.5,56732,True
+China,UAE,Road,7.3,18468,True
+China,Canada,Air,2.3,6414,True
+China,Canada,Sea,18.4,20033,True
+China,Canada,Rail,5.6,38965,True
+China,Canada,Road,7.1,5689,True
+USA,India,Air,2.2,8781,True
+USA,India,Sea,30.6,37065,True
+USA,India,Rail,12.5,41444,True
+USA,India,Road,8.7,42249,True
+Germany,France,Air,2.8,10435,True
+Germany,France,Sea,24.9,36867,True
+Germany,France,Rail,9.0,31941,True
+Germany,France,Road,10.9,11712,True
+USA,UK,Air,3.7,2704,True
+USA,UK,Sea,20.1,26231,True
+USA,UK,Rail,4.2,37677,True
+USA,UK,Road,3.6,16335,True
+Vietnam,Netherlands,Air,2.6,3214,True
+Vietnam,Netherlands,Sea,13.5,10497,True
+Vietnam,Netherlands,Rail,7.4,56615,True
+Vietnam,Netherlands,Road,4.2,55415,True
+Brazil,Germany,Air,2.2,9561,True
+Brazil,Germany,Sea,24.8,59407,True
+Brazil,Germany,Rail,6.0,21006,True
+Brazil,Germany,Road,6.2,33650,True
+Bangladesh,USA,Air,1.7,12207,True
+Bangladesh,USA,Sea,28.0,57733,True
+Bangladesh,USA,Rail,6.6,28047,True
+Bangladesh,USA,Road,6.2,23284,True
+Japan,UK,Air,2.9,12730,True
+Japan,UK,Sea,18.2,51727,True
+Japan,UK,Rail,12.0,48451,True
+Japan,UK,Road,13.3,49342,True
+South Korea,USA,Air,4.4,13526,True
+South Korea,USA,Sea,44.6,51462,True
+South Korea,USA,Rail,11.6,40133,True
+South Korea,USA,Road,9.4,33050,True
+Mexico,Japan,Air,1.9,2565,True
+Mexico,Japan,Sea,12.6,12545,True
+Mexico,Japan,Rail,10.1,40682,True
+Mexico,Japan,Road,4.1,6983,True
+Vietnam,USA,Air,3.3,3845,True
+Vietnam,USA,Sea,0.9,53824,True
+Vietnam,USA,Rail,2.3,34867,True
+Vietnam,USA,Road,3.5,17248,True
+South Korea,UAE,Air,3.3,12438,True
+South Korea,UAE,Sea,28.5,53728,True
+South Korea,UAE,Rail,11.6,37391,True
+South Korea,UAE,Road,8.2,29808,True
+Germany,UAE,Air,3.0,13470,True
+Germany,UAE,Sea,27.2,49998,True
+Germany,UAE,Rail,10.0,44954,True
+Germany,UAE,Road,0.5,23860,True
+China,Netherlands,Air,2.3,9437,True
+China,Netherlands,Sea,29.3,35616,True
+China,Netherlands,Rail,15.0,31410,True
+China,Netherlands,Road,10.7,58857,True
+Germany,UK,Air,1.1,13575,True
+Germany,UK,Sea,16.4,32178,True
+Germany,UK,Rail,7.1,37108,True
+Germany,UK,Road,8.3,38328,True
+South Korea,Japan,Air,3.6,10041,True
+South Korea,Japan,Sea,14.6,52099,True
+South Korea,Japan,Rail,8.2,7110,True
+South Korea,Japan,Road,11.6,39472,True
+Brazil,UK,Air,0.5,7274,True
+Brazil,UK,Sea,18.7,51231,True
+Brazil,UK,Rail,3.8,51207,True
+Brazil,UK,Road,5.9,26646,True
+Bangladesh,Japan,Air,1.8,2918,True
+Bangladesh,Japan,Sea,24.4,12112,True
+Bangladesh,Japan,Rail,7.4,22606,True
+Bangladesh,Japan,Road,5.8,6901,True
+South Korea,UK,Air,2.7,2940,True
+South Korea,UK,Sea,22.9,36787,True
+South Korea,UK,Rail,6.5,46844,True
+South Korea,UK,Road,8.2,51974,True
+India,Germany,Air,4.3,9961,True
+India,Germany,Sea,15.1,58735,True
+India,Germany,Rail,3.2,17050,True
+India,Germany,Road,10.2,48588,True
+USA,UAE,Air,4.7,3749,True
+USA,UAE,Sea,14.3,24916,True
+USA,UAE,Rail,8.1,57784,True
+USA,UAE,Road,0.8,10217,True
+Vietnam,Japan,Air,0.5,3137,True
+Vietnam,Japan,Sea,0.9,33922,True
+Vietnam,Japan,Rail,6.5,15256,True
+Vietnam,Japan,Road,7.6,5925,True
+Japan,Japan,Air,2.5,9796,True
+Japan,Japan,Sea,26.5,55048,True
+Japan,Japan,Rail,5.7,21089,False
+Japan,Japan,Road,7.5,53684,True
+Vietnam,Germany,Air,5.0,14585,True
+Vietnam,Germany,Sea,29.9,7418,True
+Vietnam,Germany,Rail,5.8,57789,True
+Vietnam,Germany,Road,5.6,42283,True
+Brazil,Australia,Air,2.5,2312,True
+Brazil,Australia,Sea,30.4,50763,True
+Brazil,Australia,Rail,12.1,19735,True
+Brazil,Australia,Road,8.3,26555,True
+Japan,Netherlands,Air,3.0,13611,True
+Japan,Netherlands,Sea,6.1,30557,True
+Japan,Netherlands,Rail,7.8,34055,True
+Japan,Netherlands,Road,8.3,26184,True
+Brazil,Canada,Air,1.9,4624,True
+Brazil,Canada,Sea,8.5,24520,True
+Brazil,Canada,Rail,8.1,8734,True
+Brazil,Canada,Road,11.6,26127,True
+Japan,UAE,Air,3.5,9505,True
+Japan,UAE,Sea,18.3,41044,True
+Japan,UAE,Rail,13.0,40246,True
+Japan,UAE,Road,5.9,44558,True
+Germany,India,Air,1.2,6545,True
+Germany,India,Sea,41.0,25614,True
+Germany,India,Rail,10.0,41415,True
+Germany,India,Road,5.9,36999,True
+Bangladesh,Germany,Air,3.4,8603,True
+Bangladesh,Germany,Sea,13.6,47498,True
+Bangladesh,Germany,Rail,5.7,57359,True
+Bangladesh,Germany,Road,5.2,13695,True
+Vietnam,Canada,Air,2.1,5841,True
+Vietnam,Canada,Sea,19.3,32118,True
+Vietnam,Canada,Rail,7.6,20097,True
+Vietnam,Canada,Road,6.9,47505,True
+India,Canada,Air,3.7,10851,True
+India,Canada,Sea,23.7,28340,True
+India,Canada,Rail,7.4,39806,True
+India,Canada,Road,3.0,20718,True
+Japan,Germany,Air,1.9,11451,True
+Japan,Germany,Sea,11.3,32599,True
+Japan,Germany,Rail,8.8,37207,True
+Japan,Germany,Road,1.1,15455,True
+South Korea,Canada,Air,3.8,6780,True
+South Korea,Canada,Sea,10.8,41203,True
+South Korea,Canada,Rail,3.8,30467,True
+South Korea,Canada,Road,10.6,6837,True
+China,Australia,Air,2.2,11560,True
+China,Australia,Sea,28.6,5823,True
+China,Australia,Rail,0.8,9979,True
+China,Australia,Road,14.0,45958,True
+Brazil,India,Air,0.5,3574,True
+Brazil,India,Sea,11.9,19160,True
+Brazil,India,Rail,7.3,55341,True
+Brazil,India,Road,8.9,13927,True
+South Korea,Australia,Air,2.5,6526,True
+South Korea,Australia,Sea,17.0,59085,True
+South Korea,Australia,Rail,10.6,33031,True
+South Korea,Australia,Road,1.1,59482,True
+Bangladesh,UAE,Air,5.4,5323,True
+Bangladesh,UAE,Sea,17.3,38066,True
+Bangladesh,UAE,Rail,6.7,36969,True
+Bangladesh,UAE,Road,11.9,16100,True
+Mexico,Australia,Air,3.5,12844,True
+Mexico,Australia,Sea,5.7,25401,True
+Mexico,Australia,Rail,6.7,23135,True
+Mexico,Australia,Road,0.9,12673,True
+Germany,USA,Air,3.8,4336,True
+Germany,USA,Sea,32.5,23044,True
+Germany,USA,Rail,16.0,23271,True
+Germany,USA,Road,7.7,16958,True
+India,UK,Air,1.0,3136,True
+India,UK,Sea,14.0,22861,True
+India,UK,Rail,3.8,20602,True
+India,UK,Road,4.8,33468,True
+Bangladesh,UK,Air,2.3,10743,True
+Bangladesh,UK,Sea,11.3,35991,True
+Bangladesh,UK,Rail,15.7,22570,True
+Bangladesh,UK,Road,11.4,29084,True
+China,Germany,Air,1.3,7453,True
+China,Germany,Sea,14.0,32503,True
+China,Germany,Rail,7.0,44829,True
+China,Germany,Road,11.0,42282,True
+South Korea,France,Air,4.3,13404,True
+South Korea,France,Sea,20.3,40869,True
+South Korea,France,Rail,5.1,45037,True
+South Korea,France,Road,2.7,56552,True
+Japan,USA,Air,2.1,11148,True
+Japan,USA,Sea,0.9,19537,True
+Japan,USA,Rail,8.2,20245,True
+Japan,USA,Road,9.8,39228,True
+USA,France,Air,1.9,11850,True
+USA,France,Sea,22.9,16550,True
+USA,France,Rail,0.5,50797,True
+USA,France,Road,5.6,55945,True
+Brazil,Japan,Air,5.2,8771,True
+Brazil,Japan,Sea,27.1,57111,True
+Brazil,Japan,Rail,8.0,44428,True
+Brazil,Japan,Road,2.0,43268,True
+USA,Japan,Air,3.5,10418,True
+USA,Japan,Sea,35.2,49940,True
+USA,Japan,Rail,12.6,49443,True
+USA,Japan,Road,3.1,59303,True
+USA,USA,Air,0.9,5074,True
+USA,USA,Sea,11.4,38153,True
+USA,USA,Rail,10.6,7551,True
+USA,USA,Road,5.3,40941,True
+Vietnam,Australia,Air,3.6,9886,True
+Vietnam,Australia,Sea,15.2,46314,True
+Vietnam,Australia,Rail,11.3,30501,True
+Vietnam,Australia,Road,3.8,32979,True
+India,Australia,Air,3.5,6429,True
+India,Australia,Sea,23.1,19328,True
+India,Australia,Rail,6.5,7703,True
+India,Australia,Road,11.8,58611,True
+Japan,India,Air,4.8,14450,True
+Japan,India,Sea,15.0,36564,True
+Japan,India,Rail,7.1,7528,True
+Japan,India,Road,5.2,43871,True
+India,Japan,Air,1.8,10398,True
+India,Japan,Sea,18.2,8731,True
+India,Japan,Rail,15.8,56638,True
+India,Japan,Road,7.9,32174,True
+China,USA,Air,5.5,14492,True
+China,USA,Sea,16.1,26044,True
+China,USA,Rail,3.5,55679,True
+China,USA,Road,3.9,44286,True
+Vietnam,UK,Air,2.6,14784,True
+Vietnam,UK,Sea,33.1,37746,True
+Vietnam,UK,Rail,13.3,53635,True
+Vietnam,UK,Road,2.7,39757,True
+South Korea,Netherlands,Air,4.8,5451,True
+South Korea,Netherlands,Sea,8.3,20851,True
+South Korea,Netherlands,Rail,1.0,18345,True
+South Korea,Netherlands,Road,1.7,55001,True
+Brazil,France,Air,1.9,12142,True
+Brazil,France,Sea,15.1,36701,True
+Brazil,France,Rail,9.9,56247,True
+Brazil,France,Road,6.5,36066,True
+Mexico,Netherlands,Air,5.3,12530,True
+Mexico,Netherlands,Sea,22.2,36204,True
+Mexico,Netherlands,Rail,1.8,43712,True
+Mexico,Netherlands,Road,4.8,18681,True
+Bangladesh,France,Air,4.1,12690,True
+Bangladesh,France,Sea,24.3,6492,True
+Bangladesh,France,Rail,11.2,46644,True
+Bangladesh,France,Road,9.7,48231,True
+Japan,France,Air,1.7,2559,True
+Japan,France,Sea,15.0,58106,True
+Japan,France,Rail,9.9,59782,True
+Japan,France,Road,6.5,22427,True
+India,Netherlands,Air,1.2,12422,True
+India,Netherlands,Sea,19.0,7999,True
+India,Netherlands,Rail,6.1,56265,True
+India,Netherlands,Road,6.7,12036,True
+China,France,Air,1.9,5263,True
+China,France,Sea,9.2,33524,True
+China,France,Rail,18.3,52700,True
+China,France,Road,7.2,45421,True
+Brazil,UAE,Air,4.3,8736,True
+Brazil,UAE,Sea,0.9,45812,True
+Brazil,UAE,Rail,6.7,33355,True
+Brazil,UAE,Road,5.6,37926,True
+Germany,Canada,Air,3.0,11735,True
+Germany,Canada,Sea,8.0,29995,True
+Germany,Canada,Rail,10.1,18945,True
+Germany,Canada,Road,7.4,5070,True
+USA,Canada,Air,2.0,13936,True
+USA,Canada,Sea,17.6,58709,True
+USA,Canada,Rail,15.9,46179,True
+USA,Canada,Road,8.6,18386,True
+China,Japan,Air,2.6,8839,True
+China,Japan,Sea,24.5,6500,True
+China,Japan,Rail,7.1,33093,True
+China,Japan,Road,0.5,59269,True
+Japan,Canada,Air,4.4,14040,True
+Japan,Canada,Sea,36.2,31548,True
+Japan,Canada,Rail,8.3,41583,True
+Japan,Canada,Road,5.0,38666,True
+Germany,Netherlands,Air,2.7,9832,True
+Germany,Netherlands,Sea,33.9,17591,True
+Germany,Netherlands,Rail,17.8,34248,True
+Germany,Netherlands,Road,6.3,14135,True
+USA,Australia,Air,1.0,12481,True
+USA,Australia,Sea,19.3,45619,True
+USA,Australia,Rail,7.2,11230,True
+USA,Australia,Road,4.5,41309,True
+Germany,Germany,Air,2.9,3286,True
+Germany,Germany,Sea,28.7,57907,True
+Germany,Germany,Rail,13.3,27913,True
+Germany,Germany,Road,5.9,33050,True
+Mexico,UAE,Air,1.1,6305,True
+Mexico,UAE,Sea,10.5,17167,True
+Mexico,UAE,Rail,6.4,7187,True
+Mexico,UAE,Road,6.7,11878,True
+Vietnam,UAE,Air,0.5,13577,True
+Vietnam,UAE,Sea,26.0,12719,True
+Vietnam,UAE,Rail,6.8,29275,True
+Vietnam,UAE,Road,6.8,14379,True
+India,India,Air,2.5,3866,True
+India,India,Sea,18.3,8400,True
+India,India,Rail,4.0,33719,True
+India,India,Road,1.9,57106,True
