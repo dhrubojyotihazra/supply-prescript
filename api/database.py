@@ -8,10 +8,23 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL is not set in .env file")
+engine = None
+if DATABASE_URL:
+    try:
+        temp_engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 3})
+        with temp_engine.connect() as conn:
+            pass
+        engine = temp_engine
+        print("[DATABASE] Connected to Cloud Supabase PostgreSQL Database.")
+    except Exception as e:
+        print(f"[WARNING] Supabase PostgreSQL connection unavailable. Falling back to local SQLite database.")
+        engine = None
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+if engine is None:
+    SQLITE_URL = "sqlite:///./supply_prescript.db"
+    engine = create_engine(SQLITE_URL, connect_args={"check_same_thread": False})
+    print("[DATABASE] Operating with Local SQLite Database: supply_prescript.db")
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
@@ -22,3 +35,5 @@ def get_db():
         yield db
     finally:
         db.close()
+
+

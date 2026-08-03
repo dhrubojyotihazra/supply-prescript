@@ -9,38 +9,39 @@ count = db.query(models.Warehouse).count()
 if count == 0:
     print("Seeding warehouse data from FMCG_data.csv...")
     df = pd.read_csv("data/FMCG_data.csv")
-    
-    df_clean = df.fillna({
-        'Location_type': 'Unknown',
-        'WH_capacity_size': 'Unknown',
-        'zone': 'Unknown',
-        'workers_num': 0,
-        'dist_from_hub': 0,
-        'transport_issue_l1y': 0,
-        'wh_breakdown_l3m': 0,
-        'product_wg_ton': 0
-    })
 
     warehouses = []
-    for _, row in df_clean.iterrows():
+    for idx, row in df.iterrows():
+        wh_id = str(row.get('Warehouse_ID', row.get('Ware_house_ID', f"WH_{idx+100000}")))
+        loc_type = str(row.get('Location_type', 'Urban'))
+        cap_size = str(row.get('WH_capacity_size', row.get('Capacity', 'Medium')))
+        zone_val = str(row.get('zone', 'North'))
+        workers = float(row.get('workers_num', 45.0))
+        dist = float(row.get('dist_from_hub', 12.5))
+        trans_issue = int(row.get('transport_issue_l1y', row.get('Delivery_Time_Days', 0)))
+        wh_break = int(row.get('wh_breakdown_l3m', 0))
+        prod_wg = float(row.get('product_wg_ton', row.get('Demand', 100.0)))
+        status_val = "Delayed" if trans_issue > 2 else "Normal"
+
         wh = models.Warehouse(
-            warehouse_id=str(row['Ware_house_ID']),
-            location_type=str(row['Location_type']),
-            capacity_size=str(row['WH_capacity_size']),
-            zone=str(row['zone']),
-            workers_num=float(row['workers_num']),
-            dist_from_hub=float(row['dist_from_hub']),
-            transport_issue_l1y=int(row['transport_issue_l1y']),
-            wh_breakdown_l3m=int(row['wh_breakdown_l3m']),
-            product_wg_ton=float(row['product_wg_ton']),
-            status="Delayed" if int(row['transport_issue_l1y']) > 2 else "Normal"
+            warehouse_id=wh_id,
+            location_type=loc_type,
+            capacity_size=cap_size,
+            zone=zone_val,
+            workers_num=workers,
+            dist_from_hub=dist,
+            transport_issue_l1y=trans_issue,
+            wh_breakdown_l3m=wh_break,
+            product_wg_ton=prod_wg,
+            status=status_val
         )
         warehouses.append(wh)
     
     db.bulk_save_objects(warehouses)
     db.commit()
-    print(f"Successfully seeded {len(warehouses)} warehouses into Supabase PostgreSQL!")
+    print(f"Successfully seeded {len(warehouses)} warehouses into database!")
 else:
     print(f"Warehouses table already contains {count} records.")
 
 db.close()
+
