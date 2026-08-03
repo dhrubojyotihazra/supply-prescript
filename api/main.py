@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from pydantic import BaseModel
@@ -41,13 +42,157 @@ class ChatRequest(BaseModel):
     dist_from_hub: Optional[float] = 100.0
     product_wg_ton: Optional[float] = 15000.0
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def read_root():
-    return {
-        "status": "online",
-        "service": "SupplyPrescript Backend API",
-        "database": "Connected to Supabase PostgreSQL"
-    }
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SupplyPrescript Core Backend API</title>
+        <link rel="icon" type="image/png" href="https://supply-prescript.vercel.app/logo.png">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+        <style>
+            * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+            body { background-color: #f4f4f0; color: #000; padding: 2rem; min-height: 100vh; }
+            .container { max-width: 1000px; margin: 0 auto; }
+            .header { background: #fff; border: 3px solid #000; padding: 1.5rem 2rem; border-radius: 8px; box-shadow: 5px 5px 0px #000; display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+            .logo-group { display: flex; align-items: center; gap: 1rem; }
+            .logo-img { height: 48px; border: 2px solid #000; border-radius: 6px; box-shadow: 2px 2px 0px #000; background: #fff; padding: 3px; }
+            .title { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; }
+            .badge-live { background: #4ade80; color: #000; border: 2px solid #000; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 900; font-size: 0.85rem; box-shadow: 2px 2px 0px #000; display: inline-flex; align-items: center; gap: 0.4rem; }
+            .dot { width: 9px; height: 9px; background: #000; border-radius: 50%; display: inline-block; }
+            
+            .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+            .card { background: #fff; border: 3px solid #000; padding: 1.25rem; border-radius: 8px; box-shadow: 4px 4px 0px #000; }
+            .card:nth-child(1) { background: #bae6fd; }
+            .card:nth-child(2) { background: #bbf7d0; }
+            .card:nth-child(3) { background: #fef08a; }
+            .card:nth-child(4) { background: #fecdd3; }
+            .card-title { font-size: 0.75rem; text-transform: uppercase; font-weight: 900; letter-spacing: 0.05em; }
+            .card-val { font-size: 1.6rem; font-weight: 900; margin: 0.3rem 0; }
+            .card-sub { font-size: 0.8rem; font-weight: 700; }
+
+            .section { background: #fff; border: 3px solid #000; padding: 1.75rem; border-radius: 8px; box-shadow: 5px 5px 0px #000; margin-bottom: 2rem; }
+            .sec-title { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem; }
+            
+            .endpoint-list { display: flex; flex-direction: column; gap: 0.85rem; }
+            .endpoint-item { background: #f8fafc; border: 2px solid #000; padding: 0.85rem 1rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: 2px 2px 0px #000; }
+            .method { font-size: 0.75rem; font-weight: 900; padding: 0.25rem 0.6rem; border-radius: 4px; border: 2px solid #000; text-transform: uppercase; box-shadow: 1px 1px 0px #000; }
+            .method-get { background: #38bdf8; }
+            .method-post { background: #facc15; }
+            .path { font-family: monospace; font-weight: 900; font-size: 0.95rem; }
+            .desc { font-size: 0.85rem; font-weight: 700; color: #4b5563; }
+            
+            .btn { background: #38bdf8; border: 2px solid #000; color: #000; padding: 0.6rem 1.25rem; border-radius: 6px; font-weight: 900; font-size: 0.85rem; text-decoration: none; display: inline-block; box-shadow: 3px 3px 0px #000; text-transform: uppercase; transition: all 0.15s ease; }
+            .btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0px #000; background: #0284c7; color: #fff; }
+            .btn-yellow { background: #facc15; }
+            .btn-yellow:hover { background: #eab308; color: #000; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="logo-group">
+                    <img src="https://supply-prescript.vercel.app/logo.png" alt="Logo" class="logo-img">
+                    <div>
+                        <h1 class="title">SupplyPrescript API</h1>
+                        <p style="font-size:0.85rem; font-weight:700; color:#4b5563;">Closed-Loop Prescriptive Analytics Cloud Engine</p>
+                    </div>
+                </div>
+                <div class="badge-live">
+                    <span class="dot"></span>
+                    <span>Backend System Online</span>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-title">Cloud Database</div>
+                    <div class="card-val">22,149</div>
+                    <div class="card-sub">✓ Supabase PostgreSQL Live</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">SciPy Prescriptions</div>
+                    <div class="card-val">3 Choices</div>
+                    <div class="card-sub">⚡ Real-time linprog solver</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">AI Logistics Advisor</div>
+                    <div class="card-val">Active</div>
+                    <div class="card-sub">🤖 LLM Chatbot Service</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Write-Back System</div>
+                    <div class="card-val">Closed-Loop</div>
+                    <div class="card-sub">🔁 Relational Outcome Logger</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="sec-title">Interactive API Documentation</h2>
+                <p style="font-size:0.9rem; font-weight:700; color:#4b5563; margin-bottom:1.25rem;">
+                    Test all backend endpoints, schemas, and live database responses interactively via Swagger UI or ReDoc.
+                </p>
+                <div style="display:flex; gap:1rem;">
+                    <a href="/docs" class="btn btn-yellow">⚡ Open Interactive Swagger Docs (/docs)</a>
+                    <a href="/redoc" class="btn">📖 Open ReDoc Specification (/redoc)</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="sec-title">Core API Endpoints Directory</h2>
+                <div class="endpoint-list">
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-get">GET</span>
+                            <span class="path">/warehouses</span>
+                        </div>
+                        <span class="desc">Fetches 22,149 paginated warehouse records from Supabase</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-post">POST</span>
+                            <span class="path">/prescribe</span>
+                        </div>
+                        <span class="desc">Runs SciPy LP optimization for warehouse-specific choices</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-post">POST</span>
+                            <span class="path">/chat-assistant</span>
+                        </div>
+                        <span class="desc">Interactive AI Logistics Advisor (LLM Chatbot) advice</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-post">POST</span>
+                            <span class="path">/execute-decision</span>
+                        </div>
+                        <span class="desc">Performs live decision write-back into Supabase PostgreSQL</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-post">POST</span>
+                            <span class="path">/log-outcome</span>
+                        </div>
+                        <span class="desc">Logs actual real-world costs and delays to close feedback loop</span>
+                    </div>
+                    <div class="endpoint-item">
+                        <div style="display:flex; align-items:center; gap:0.75rem;">
+                            <span class="method method-get">GET</span>
+                            <span class="path">/decisions</span>
+                        </div>
+                        <span class="desc">Lists executed decision history for outcome evaluation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return html_content
 
 @app.get("/health")
 def health_check():
@@ -81,9 +226,6 @@ def predict_delay(features: dict):
 
 @app.post("/prescribe")
 def prescribe_actions(req: Optional[PrescribeRequest] = None):
-    """
-    Runs SciPy LP optimization solver dynamically tailored to the specific warehouse metrics.
-    """
     try:
         dist = req.dist_from_hub if req and req.dist_from_hub else 100.0
         weight = req.product_wg_ton if req and req.product_wg_ton else 15000.0
@@ -105,9 +247,6 @@ def prescribe_actions(req: Optional[PrescribeRequest] = None):
 
 @app.post("/chat-assistant")
 def chat_assistant(req: ChatRequest):
-    """
-    AI Logistics Advisor: Returns intelligent prescriptive recommendations for a warehouse.
-    """
     p = req.prompt.lower()
     w_id = req.warehouse_id or "target warehouse"
     dist = req.dist_from_hub or 100.0
