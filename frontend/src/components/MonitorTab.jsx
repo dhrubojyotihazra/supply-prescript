@@ -59,10 +59,10 @@ export default function MonitorTab({ onSelectWarehouse }) {
 
       <div className="controls-bar">
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
+          <h2 style={{ fontSize: '1.3rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
             Warehouse Operations Monitor
           </h2>
-          <p style={{ color: '#4b5563', fontSize: '0.9rem', fontWeight: 700 }}>
+          <p style={{ color: '#4b5563', fontSize: '0.85rem', fontWeight: 700 }}>
             Real-time warehouse tracking & SciPy linear optimization action hub
           </p>
         </div>
@@ -77,8 +77,8 @@ export default function MonitorTab({ onSelectWarehouse }) {
 
       <div className="glass-panel table-container">
         {loading ? (
-          <div style={{ padding: '4rem', textAlign: 'center', color: '#000000', fontWeight: 800 }}>
-            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.2rem' }}>Querying Supabase PostgreSQL...</h3>
+          <div style={{ padding: '3rem', textAlign: 'center', color: '#000000', fontWeight: 800 }}>
+            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Querying Supabase PostgreSQL...</h3>
             <p>Fetching 22,149 paginated warehouse records</p>
           </div>
         ) : (
@@ -87,12 +87,12 @@ export default function MonitorTab({ onSelectWarehouse }) {
               <tr>
                 <th>Warehouse ID</th>
                 <th>Zone</th>
-                <th>Location Type</th>
-                <th>Capacity Size</th>
-                <th>Distance from Hub</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Distance</th>
                 <th>Workers</th>
-                <th>Product Weight (Tons)</th>
-                <th>Transport Issues (L1Y)</th>
+                <th>Weight (Tons)</th>
+                <th>Issues (L1Y)</th>
                 <th>Status</th>
                 <th style={{ textAlign: 'right' }}>Prescriptive Action</th>
               </tr>

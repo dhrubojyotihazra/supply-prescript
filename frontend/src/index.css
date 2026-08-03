@@ -4,8 +4,8 @@
   --bg-main: #f4f4f0;
   --bg-card: #ffffff;
   --border-thick: 3px solid #000000;
-  --shadow-hard: 4px 4px 0px #000000;
-  --shadow-hard-lg: 5px 5px 0px #000000;
+  --shadow-hard: 3px 3px 0px #000000;
+  --shadow-hard-lg: 4px 4px 0px #000000;
   --text-main: #000000;
   --text-muted: #4b5563;
   --accent-yellow: #facc15;
@@ -23,12 +23,13 @@
   padding: 0;
 }
 
-body {
+html, body {
   background-color: var(--bg-main);
   color: var(--text-main);
   font-family: var(--font-family);
   min-height: 100vh;
-  line-height: 1.4;
+  line-height: 1.35;
+  width: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -46,24 +47,26 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.85rem 1.5rem;
+  padding: 0.6rem 1.25rem;
   border-bottom: var(--border-thick);
   background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 50;
   width: 100%;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   background: var(--accent-yellow);
   border: var(--border-thick);
   border-radius: 6px;
@@ -72,12 +75,12 @@ body {
   justify-content: center;
   font-weight: 900;
   color: #000000;
-  font-size: 1.2rem;
-  box-shadow: 3px 3px 0px #000000;
+  font-size: 1.1rem;
+  box-shadow: 2px 2px 0px #000000;
 }
 
 .brand-title {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 900;
   letter-spacing: -0.03em;
   color: #000000;
@@ -86,56 +89,58 @@ body {
 
 .nav-tabs {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .tab-btn {
   background: #ffffff;
   border: var(--border-thick);
   color: #000000;
-  padding: 0.5rem 1.1rem;
+  padding: 0.4rem 0.85rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 800;
-  font-size: 0.85rem;
-  box-shadow: 3px 3px 0px #000000;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 0px #000000;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .tab-btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #000000;
+  box-shadow: 4px 4px 0px #000000;
 }
 
 .tab-btn.active {
   background: var(--accent-yellow);
-  box-shadow: 4px 4px 0px #000000;
+  box-shadow: 3px 3px 0px #000000;
 }
 
 .status-badge {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.85rem;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 800;
   background: var(--accent-green);
   color: #000000;
   border: var(--border-thick);
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: 2px 2px 0px #000000;
+  white-space: nowrap;
 }
 
 .status-dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #000000;
 }
 
 /* Layout Main */
 .app-main {
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -144,17 +149,17 @@ body {
 /* KPI Summary Grid */
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
   width: 100%;
 }
 
 .kpi-card {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.15rem;
   border: var(--border-thick);
   border-radius: 6px;
   box-shadow: var(--shadow-hard);
@@ -166,22 +171,22 @@ body {
 .kpi-card:nth-child(4) { background: #bbf7d0; }
 
 .kpi-title {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: #000000;
   font-weight: 900;
 }
 
 .kpi-value {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 900;
   color: #000000;
   line-height: 1.1;
 }
 
 .kpi-sub {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #000000;
   font-weight: 700;
 }
@@ -191,8 +196,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
-  gap: 1rem;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   width: 100%;
 }
@@ -201,20 +206,20 @@ body {
   background: #ffffff;
   border: var(--border-thick);
   color: #000000;
-  padding: 0.65rem 1rem;
+  padding: 0.55rem 0.85rem;
   border-radius: 6px;
-  width: 320px;
+  width: 280px;
   max-width: 100%;
   outline: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: 2px 2px 0px #000000;
   transition: all 0.15s ease;
 }
 
 .search-input:focus {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #000000;
+  box-shadow: 4px 4px 0px #000000;
   background: #fffbeb;
 }
 
@@ -234,25 +239,24 @@ body {
   border-collapse: collapse;
   text-align: left;
   table-layout: auto;
-  min-width: 900px;
 }
 
 .custom-table th {
   background: #000000;
   color: #ffffff;
   font-weight: 900;
-  padding: 0.75rem 0.85rem;
+  padding: 0.6rem 0.65rem;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
   border-bottom: var(--border-thick);
   white-space: nowrap;
 }
 
 .custom-table td {
-  padding: 0.75rem 0.85rem;
+  padding: 0.55rem 0.65rem;
   border-bottom: 2px solid #000000;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #000000;
   white-space: nowrap;
@@ -269,10 +273,10 @@ body {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.25rem 0.65rem;
+  gap: 0.25rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 900;
   border: 2px solid #000000;
   box-shadow: 2px 2px 0px #000000;
@@ -292,12 +296,12 @@ body {
   background: var(--accent-cyan);
   border: 2px solid #000000;
   color: #000000;
-  padding: 0.45rem 0.85rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 900;
-  font-size: 0.8rem;
-  box-shadow: 3px 3px 0px #000000;
+  font-size: 0.75rem;
+  box-shadow: 2px 2px 0px #000000;
   transition: all 0.15s ease;
   text-transform: uppercase;
   white-space: nowrap;
@@ -305,7 +309,7 @@ body {
 
 .btn-action:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #000000;
+  box-shadow: 4px 4px 0px #000000;
   background: #0284c7;
   color: #ffffff;
 }
@@ -315,35 +319,35 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   color: #000000;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 800;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .pagination-actions {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .btn-secondary {
   background: #ffffff;
   border: 2px solid #000000;
   color: #000000;
-  padding: 0.45rem 1rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 900;
-  font-size: 0.85rem;
-  box-shadow: 3px 3px 0px #000000;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 0px #000000;
   transition: all 0.15s ease;
 }
 
 .btn-secondary:hover:not(:disabled) {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #000000;
+  box-shadow: 4px 4px 0px #000000;
   background: var(--accent-yellow);
 }
 
@@ -364,17 +368,17 @@ body {
 }
 
 .drawer-content {
-  width: 520px;
+  width: 480px;
   max-width: 90vw;
   height: 100%;
   background: #ffffff;
   border-left: 4px solid #000000;
-  padding: 1.5rem;
+  padding: 1.25rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  box-shadow: -6px 0 0px #000000;
+  gap: 1rem;
+  box-shadow: -5px 0 0px #000000;
 }
 
 .drawer-header {
@@ -382,23 +386,23 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 3px solid #000000;
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
 }
 
 .close-btn {
   background: #ffffff;
   border: 2px solid #000000;
   color: #000000;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 6px;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 900;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 3px 3px 0px #000000;
+  box-shadow: 2px 2px 0px #000000;
 }
 
 .close-btn:hover {
@@ -410,17 +414,17 @@ body {
   background: #f8fafc;
   border: 3px solid #000000;
   border-radius: 6px;
-  padding: 1.15rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: 4px 4px 0px #000000;
+  gap: 0.65rem;
+  box-shadow: 3px 3px 0px #000000;
   transition: all 0.15s ease;
 }
 
 .option-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: 5px 5px 0px #000000;
   background: #fffdf5;
 }
 
@@ -432,14 +436,14 @@ body {
 
 .option-title {
   font-weight: 900;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #000000;
 }
 
 .option-badge {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 900;
-  padding: 0.25rem 0.65rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 6px;
   background: var(--accent-purple);
   color: #000000;
@@ -450,11 +454,11 @@ body {
 .option-metrics {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #000000;
   background: #ffffff;
   border: 2px solid #000000;
-  padding: 0.55rem 0.75rem;
+  padding: 0.45rem 0.65rem;
   border-radius: 6px;
   font-weight: 800;
 }
@@ -468,33 +472,33 @@ body {
   background: var(--accent-yellow);
   border: 3px solid #000000;
   color: #000000;
-  padding: 0.75rem 0.85rem;
+  padding: 0.65rem 0.75rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 900;
-  font-size: 0.85rem;
-  box-shadow: 4px 4px 0px #000000;
+  font-size: 0.8rem;
+  box-shadow: 3px 3px 0px #000000;
   transition: all 0.15s ease;
   text-transform: uppercase;
 }
 
 .btn-execute:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
+  box-shadow: 5px 5px 0px #000000;
   background: var(--accent-green);
 }
 
 /* Toast */
 .toast {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   background: var(--accent-green);
   color: #000000;
   border: 3px solid #000000;
-  padding: 0.85rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 6px;
   font-weight: 900;
-  box-shadow: 5px 5px 0px #000000;
+  box-shadow: 4px 4px 0px #000000;
   z-index: 200;
 }
