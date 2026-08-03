@@ -42,11 +42,20 @@ def health_check():
 @app.get("/warehouses", response_model=List[schemas.WarehouseBase])
 def get_warehouses(
     skip: int = Query(0, ge=0, description="Records to skip"),
-    limit: int = Query(100, ge=1, le=1000, description="Max records to return"),
+    limit: int = Query(50, ge=1, le=1000, description="Max records to return"),
     db: Session = Depends(get_db)
 ):
     warehouses = db.query(models.Warehouse).offset(skip).limit(limit).all()
     return warehouses
+
+@app.get("/decisions", response_model=List[schemas.DecisionResponse])
+def get_decisions(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=100),
+    db: Session = Depends(get_db)
+):
+    decisions = db.query(models.Decision).order_by(models.Decision.id.desc()).offset(skip).limit(limit).all()
+    return decisions
 
 @app.post("/predict")
 def predict_delay(features: dict):
@@ -66,10 +75,8 @@ def prescribe_actions(budgets: Optional[List[float]] = Query(None, description="
     """
     try:
         if budgets:
-            # Generate optimal choices for custom budgets
             choices = generate_optimal_choices(budgets)
         else:
-            # Default budgets: Choice A (50000), Choice B (30000), Choice C (25000)
             choices = generate_optimal_choices()
         return {
             "status": "success",

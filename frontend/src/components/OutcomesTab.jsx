@@ -1,10 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function OutcomesTab({ onOutcomeLogged }) {
+  const [decisions, setDecisions] = useState([]);
   const [decisionId, setDecisionId] = useState('');
   const [actualCost, setActualCost] = useState('');
   const [actualDelayDays, setActualDelayDays] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [loadingDecisions, setLoadingDecisions] = useState(true);
+
+  const fetchDecisions = () => {
+    setLoadingDecisions(true);
+    fetch('http://localhost:8000/decisions?skip=0&limit=10')
+      .then((res) => res.json())
+      .then((data) => {
+        setDecisions(data || []);
+        setLoadingDecisions(false);
+      })
+      .catch((err) => {
+        console.error('Failed to load decisions:', err);
+        setLoadingDecisions(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchDecisions();
+  }, []);
+
+  const handleSelectDecision = (dec) => {
+    setDecisionId(dec.id);
+    setActualCost(dec.prescribed_cost);
+    setActualDelayDays(dec.expected_delay_days);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +56,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
         setDecisionId('');
         setActualCost('');
         setActualDelayDays('');
+        fetchDecisions();
       } else {
         alert(data.detail || 'Failed to log outcome');
       }
@@ -40,66 +67,124 @@ export default function OutcomesTab({ onOutcomeLogged }) {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <h2>Closed-Loop Outcome Logger</h2>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-          Evaluate historical decisions by recording real-world actual costs & delays.
-        </p>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+      {/* Decision History */}
+      <div>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Executed Decision History</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+            Decisions written back to Supabase PostgreSQL (Click to evaluate)
+          </p>
+        </div>
+
+        <div className="glass-panel table-container">
+          {loadingDecisions ? (
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+              Loading decisions from database...
+            </div>
+          ) : decisions.length === 0 ? (
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+              No decisions executed yet. Use the <strong>Warehouse Monitor</strong> tab to execute decisions!
+            </div>
+          ) : (
+            <table className="custom-table">
+              <thead>
+                <tr>
+                  <th>Record ID</th>
+                  <th>Warehouse ID</th>
+                  <th>Selected Option</th>
+                  <th>Prescribed Cost</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {decisions.map((dec) => (
+                  <tr key={dec.id}>
+                    <td style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>#{dec.id}</td>
+                    <td style={{ fontWeight: 600, color: '#fff' }}>{dec.warehouse_id}</td>
+                    <td>{dec.selected_option}</td>
+                    <td style={{ color: 'var(--accent-green)', fontWeight: 700 }}>
+                      ${dec.prescribed_cost?.toLocaleString()}
+                    </td>
+                    <td>
+                      <button
+                        className="btn-secondary"
+                        style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
+                        onClick={() => handleSelectDecision(dec)}
+                      >
+                        Select
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
 
-      <div className="glass-panel" style={{ padding: '2rem' }}>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
-              Decision Record ID
-            </label>
-            <input
-              type="number"
-              className="search-input"
-              style={{ width: '100%' }}
-              placeholder="e.g. 1"
-              value={decisionId}
-              onChange={(e) => setDecisionId(e.target.value)}
-              required
-            />
-          </div>
+      {/* Closed-Loop Logger Form */}
+      <div>
+        <div style={{ marginBottom: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Closed-Loop Outcome Logger</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+            Record actual real-world costs & delays to close the feedback loop
+          </p>
+        </div>
 
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
-              Actual Real-World Cost ($)
-            </label>
-            <input
-              type="number"
-              step="0.01"
-              className="search-input"
-              style={{ width: '100%' }}
-              placeholder="e.g. 18500.00"
-              value={actualCost}
-              onChange={(e) => setActualCost(e.target.value)}
-              required
-            />
-          </div>
+        <div className="glass-panel" style={{ padding: '2rem' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+                Selected Decision Record ID
+              </label>
+              <input
+                type="number"
+                className="search-input"
+                style={{ width: '100%' }}
+                placeholder="Click a decision from the left table or type ID..."
+                value={decisionId}
+                onChange={(e) => setDecisionId(e.target.value)}
+                required
+              />
+            </div>
 
-          <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 600 }}>
-              Actual Delay Incurred (Days)
-            </label>
-            <input
-              type="number"
-              className="search-input"
-              style={{ width: '100%' }}
-              placeholder="e.g. 3"
-              value={actualDelayDays}
-              onChange={(e) => setActualDelayDays(e.target.value)}
-              required
-            />
-          </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+                Actual Real-World Cost ($)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                className="search-input"
+                style={{ width: '100%' }}
+                placeholder="e.g. 18500.00"
+                value={actualCost}
+                onChange={(e) => setActualCost(e.target.value)}
+                required
+              />
+            </div>
 
-          <button type="submit" className="btn-primary" disabled={submitting}>
-            {submitting ? 'Submitting to Supabase...' : 'Submit Closed-Loop Outcome'}
-          </button>
-        </form>
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+                Actual Delay Incurred (Days)
+              </label>
+              <input
+                type="number"
+                className="search-input"
+                style={{ width: '100%' }}
+                placeholder="e.g. 3"
+                value={actualDelayDays}
+                onChange={(e) => setActualDelayDays(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn-execute" disabled={submitting}>
+              {submitting ? 'Writing to Supabase...' : '🔁 Submit Closed-Loop Outcome (Save to PostgreSQL)'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
