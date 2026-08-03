@@ -13,11 +13,16 @@ export default function OutcomesTab({ onOutcomeLogged }) {
     fetch('http://localhost:8000/decisions?skip=0&limit=10')
       .then((res) => res.json())
       .then((data) => {
-        setDecisions(data || []);
+        if (Array.isArray(data)) {
+          setDecisions(data);
+        } else {
+          setDecisions([]);
+        }
         setLoadingDecisions(false);
       })
       .catch((err) => {
         console.error('Failed to load decisions:', err);
+        setDecisions([]);
         setLoadingDecisions(false);
       });
   };
@@ -27,9 +32,10 @@ export default function OutcomesTab({ onOutcomeLogged }) {
   }, []);
 
   const handleSelectDecision = (dec) => {
+    if (!dec) return;
     setDecisionId(dec.id);
-    setActualCost(dec.prescribed_cost);
-    setActualDelayDays(dec.expected_delay_days);
+    setActualCost(dec.prescribed_cost || '');
+    setActualDelayDays(dec.expected_delay_days || '');
   };
 
   const handleSubmit = async (e) => {
@@ -52,7 +58,9 @@ export default function OutcomesTab({ onOutcomeLogged }) {
       setSubmitting(false);
 
       if (res.ok) {
-        onOutcomeLogged(`Closed-Loop Outcome #${data.id} logged for Decision #${decisionId}`);
+        if (onOutcomeLogged) {
+          onOutcomeLogged(`Closed-Loop Outcome #${data.id} logged for Decision #${decisionId}`);
+        }
         setDecisionId('');
         setActualCost('');
         setActualDelayDays('');
@@ -66,6 +74,8 @@ export default function OutcomesTab({ onOutcomeLogged }) {
     }
   };
 
+  const safeDecisionsList = Array.isArray(decisions) ? decisions : [];
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
       {/* Decision History */}
@@ -73,18 +83,21 @@ export default function OutcomesTab({ onOutcomeLogged }) {
         <div style={{ marginBottom: '1.25rem' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Executed Decision History</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-            Decisions written back to Supabase PostgreSQL (Click to evaluate)
+            Decisions written back to Supabase PostgreSQL (Click a decision to evaluate)
           </p>
         </div>
 
         <div className="glass-panel table-container">
           {loadingDecisions ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-              Loading decisions from database...
+              Loading decisions from Supabase PostgreSQL...
             </div>
-          ) : decisions.length === 0 ? (
+          ) : safeDecisionsList.length === 0 ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-              No decisions executed yet. Use the <strong>Warehouse Monitor</strong> tab to execute decisions!
+              <p style={{ marginBottom: '0.5rem', fontWeight: 600 }}>No executed decisions recorded yet.</p>
+              <p style={{ fontSize: '0.8rem' }}>
+                Go to the <strong>Warehouse Monitor</strong> tab and click <strong>⚡ Optimize & Prescribe</strong> on any row to execute a decision!
+              </p>
             </div>
           ) : (
             <table className="custom-table">
@@ -98,13 +111,13 @@ export default function OutcomesTab({ onOutcomeLogged }) {
                 </tr>
               </thead>
               <tbody>
-                {decisions.map((dec) => (
+                {safeDecisionsList.map((dec) => (
                   <tr key={dec.id}>
                     <td style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>#{dec.id}</td>
                     <td style={{ fontWeight: 600, color: '#fff' }}>{dec.warehouse_id}</td>
                     <td>{dec.selected_option}</td>
                     <td style={{ color: 'var(--accent-green)', fontWeight: 700 }}>
-                      ${dec.prescribed_cost?.toLocaleString()}
+                      ${dec.prescribed_cost ? dec.prescribed_cost.toLocaleString() : '0'}
                     </td>
                     <td>
                       <button
@@ -112,7 +125,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
                         style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
                         onClick={() => handleSelectDecision(dec)}
                       >
-                        Select
+                        Select Record
                       </button>
                     </td>
                   </tr>
