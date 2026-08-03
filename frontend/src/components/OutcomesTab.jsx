@@ -81,22 +81,26 @@ export default function OutcomesTab({ onOutcomeLogged }) {
       {/* Decision History */}
       <div>
         <div style={{ marginBottom: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Executed Decision History</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
+            Executed Decision History
+          </h2>
+          <p style={{ color: '#4b5563', fontSize: '0.9rem', fontWeight: 700 }}>
             Decisions written back to Supabase PostgreSQL (Click a decision to evaluate)
           </p>
         </div>
 
         <div className="glass-panel table-container">
           {loadingDecisions ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+            <div style={{ padding: '2.5rem', textAlign: 'center', color: '#000000', fontWeight: 800 }}>
               Loading decisions from Supabase PostgreSQL...
             </div>
           ) : safeDecisionsList.length === 0 ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-              <p style={{ marginBottom: '0.5rem', fontWeight: 600 }}>No executed decisions recorded yet.</p>
-              <p style={{ fontSize: '0.8rem' }}>
-                Go to the <strong>Warehouse Monitor</strong> tab and click <strong>⚡ Optimize & Prescribe</strong> on any row to execute a decision!
+            <div style={{ padding: '2.5rem', textAlign: 'center', color: '#000000', fontWeight: 800 }}>
+              <p style={{ marginBottom: '0.5rem', fontSize: '1rem', fontWeight: 900 }}>
+                No executed decisions recorded yet.
+              </p>
+              <p style={{ fontSize: '0.85rem', color: '#4b5563', fontWeight: 700 }}>
+                Go to the <strong>Warehouse Monitor</strong> tab and click <strong>⚡ OPTIMIZE & PRESCRIBE</strong> on any row to execute a decision!
               </p>
             </div>
           ) : (
@@ -113,16 +117,16 @@ export default function OutcomesTab({ onOutcomeLogged }) {
               <tbody>
                 {safeDecisionsList.map((dec) => (
                   <tr key={dec.id}>
-                    <td style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>#{dec.id}</td>
-                    <td style={{ fontWeight: 600, color: '#fff' }}>{dec.warehouse_id}</td>
-                    <td>{dec.selected_option}</td>
-                    <td style={{ color: 'var(--accent-green)', fontWeight: 700 }}>
+                    <td style={{ fontWeight: 900, color: '#000000' }}>#{dec.id}</td>
+                    <td style={{ fontWeight: 900, color: '#000000' }}>{dec.warehouse_id}</td>
+                    <td style={{ fontWeight: 700, color: '#000000' }}>{dec.selected_option}</td>
+                    <td style={{ color: '#059669', fontWeight: 900 }}>
                       ${dec.prescribed_cost ? dec.prescribed_cost.toLocaleString() : '0'}
                     </td>
                     <td>
                       <button
                         className="btn-secondary"
-                        style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
+                        style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem', fontWeight: 900 }}
                         onClick={() => handleSelectDecision(dec)}
                       >
                         Select Record
@@ -139,16 +143,18 @@ export default function OutcomesTab({ onOutcomeLogged }) {
       {/* Closed-Loop Logger Form */}
       <div>
         <div style={{ marginBottom: '1.25rem' }}>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Closed-Loop Outcome Logger</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
+            Closed-Loop Outcome Logger
+          </h2>
+          <p style={{ color: '#4b5563', fontSize: '0.9rem', fontWeight: 700 }}>
             Record actual real-world costs & delays to close the feedback loop
           </p>
         </div>
 
-        <div className="glass-panel" style={{ padding: '2rem' }}>
+        <div className="glass-panel" style={{ padding: '2rem', border: '3px solid #000000', boxShadow: '6px 6px 0px #000000', background: '#ffffff' }}>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
                 Selected Decision Record ID
               </label>
               <input
@@ -163,7 +169,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
             </div>
 
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
                 Actual Real-World Cost ($)
               </label>
               <input
@@ -179,7 +185,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
             </div>
 
             <div>
-              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem', fontWeight: 700 }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
                 Actual Delay Incurred (Days)
               </label>
               <input

@@ -40,27 +40,29 @@ export default function MonitorTab({ onSelectWarehouse }) {
 
         <div className="glass-panel kpi-card">
           <span className="kpi-title">Active Delay Warnings</span>
-          <span className="kpi-value" style={{ color: 'var(--accent-red)' }}>4,428</span>
-          <span className="kpi-sub" style={{ color: 'var(--accent-red)' }}>⚠️ XGBoost Delay Triggered</span>
+          <span className="kpi-value" style={{ color: '#000000' }}>4,428</span>
+          <span className="kpi-sub" style={{ color: '#b91c1c' }}>⚠️ XGBoost Delay Triggered</span>
         </div>
 
         <div className="glass-panel kpi-card">
           <span className="kpi-title">SciPy Prescriptions</span>
-          <span className="kpi-value" style={{ color: 'var(--accent-cyan)' }}>3 Choices</span>
+          <span className="kpi-value" style={{ color: '#000000' }}>3 Choices</span>
           <span className="kpi-sub">⚡ High / Medium / Low Budget</span>
         </div>
 
         <div className="glass-panel kpi-card">
           <span className="kpi-title">Closed-Loop Precision</span>
-          <span className="kpi-value" style={{ color: 'var(--accent-green)' }}>98.4%</span>
+          <span className="kpi-value" style={{ color: '#000000' }}>98.4%</span>
           <span className="kpi-sub">🔁 Write-Back ROI Evaluated</span>
         </div>
       </div>
 
       <div className="controls-bar">
         <div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 800 }}>Warehouse Operations Monitor</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#000000', textTransform: 'uppercase' }}>
+            Warehouse Operations Monitor
+          </h2>
+          <p style={{ color: '#4b5563', fontSize: '0.9rem', fontWeight: 700 }}>
             Real-time warehouse tracking & SciPy linear optimization action hub
           </p>
         </div>
@@ -75,8 +77,8 @@ export default function MonitorTab({ onSelectWarehouse }) {
 
       <div className="glass-panel table-container">
         {loading ? (
-          <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>Querying Supabase PostgreSQL...</h3>
+          <div style={{ padding: '4rem', textAlign: 'center', color: '#000000', fontWeight: 800 }}>
+            <h3 style={{ marginBottom: '0.5rem', fontSize: '1.2rem' }}>Querying Supabase PostgreSQL...</h3>
             <p>Fetching 22,149 paginated warehouse records</p>
           </div>
         ) : (
@@ -98,14 +100,14 @@ export default function MonitorTab({ onSelectWarehouse }) {
             <tbody>
               {filteredWarehouses.map((wh) => (
                 <tr key={wh.warehouse_id}>
-                  <td style={{ fontWeight: 700, color: '#ffffff' }}>{wh.warehouse_id}</td>
-                  <td>{wh.zone}</td>
-                  <td>{wh.location_type}</td>
-                  <td>{wh.capacity_size}</td>
-                  <td>{wh.dist_from_hub} km</td>
-                  <td>{wh.workers_num}</td>
-                  <td>{wh.product_wg_ton?.toLocaleString()}</td>
-                  <td>{wh.transport_issue_l1y}</td>
+                  <td style={{ fontWeight: 900, color: '#000000' }}>{wh.warehouse_id}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.zone}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.location_type}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.capacity_size}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.dist_from_hub} km</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.workers_num}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.product_wg_ton?.toLocaleString()}</td>
+                  <td style={{ color: '#000000', fontWeight: 700 }}>{wh.transport_issue_l1y}</td>
                   <td>
                     <span
                       className={`badge ${
