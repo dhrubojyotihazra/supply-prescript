@@ -1,6 +1,4 @@
-# SupplyPrescript - Week 1 Predictive Analytics Engine
-# Core dependencies (tested with Python 3.12+)
-
+# SupplyPrescript - Core Dependencies
 pandas>=2.2.0
 numpy>=1.26.0
 scikit-learn>=1.4.0
@@ -11,8 +9,9 @@ shap>=0.45.0
 joblib>=1.3.0
 scipy>=1.12.0
 
-# Future-week integration (Week 2+: API, DB, optimization layer)
+# API, Database & Optimization Dependencies
 fastapi>=0.110.0
 uvicorn>=0.29.0
 pydantic>=2.6.0
+sqlalchemy>=2.0.0
 psycopg2-binary>=2.9.9
