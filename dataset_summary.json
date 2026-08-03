@@ -1,0 +1,35 @@
+{
+  "n_rows": 15075,
+  "n_columns": 21,
+  "duplicate_rows": 75,
+  "total_missing_cells": 525,
+  "columns_with_missing": [
+    "UnitCost",
+    "InventoryLevel"
+  ],
+  "numeric_columns": [
+    "WarehouseCapacity",
+    "ShelfLifeDays",
+    "DistanceKM",
+    "PlannedLeadTimeDays",
+    "ActualLeadTimeDays",
+    "OrderQuantity",
+    "UnitCost",
+    "ShippingCost",
+    "InventoryLevel",
+    "ReorderPoint",
+    "IsDelayed"
+  ],
+  "categorical_columns": [
+    "OrderID",
+    "OrderDate",
+    "DeliveryDate",
+    "SupplierID",
+    "SupplierRegion",
+    "WarehouseID",
+    "WarehouseRegion",
+    "ProductCategory",
+    "TransportMode",
+    "CustomerPriority"
+  ]
+}

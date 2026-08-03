@@ -1,0 +1,323 @@
+{
+  "OrderID": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 15000,
+    "cardinality_ratio": 0.995,
+    "business_meaning": "Unique identifier for a purchase order; no predictive value, used for joins/traceability.",
+    "top_categories": {
+      "ORD-100149": 2,
+      "ORD-100169": 2,
+      "ORD-100251": 2,
+      "ORD-100387": 2,
+      "ORD-100542": 2
+    }
+  },
+  "OrderDate": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 730,
+    "cardinality_ratio": 0.0484,
+    "business_meaning": "Date the order was placed; drives seasonality, weekday, holiday features.",
+    "top_categories": {
+      "2023-05-31": 35,
+      "2024-02-20": 35,
+      "2024-07-16": 33,
+      "2023-01-14": 32,
+      "2024-08-23": 32
+    }
+  },
+  "DeliveryDate": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 744,
+    "cardinality_ratio": 0.0494,
+    "business_meaning": "Actual date goods arrived; combined with OrderDate defines realized lead time.",
+    "top_categories": {
+      "2024-01-08": 36,
+      "2024-03-25": 35,
+      "2024-07-04": 34,
+      "2024-07-30": 33,
+      "2024-03-10": 32
+    }
+  },
+  "SupplierID": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 40,
+    "cardinality_ratio": 0.0027,
+    "business_meaning": "Identifies the vendor fulfilling the order; core driver of reliability/risk.",
+    "top_categories": {
+      "SUP-032": 411,
+      "SUP-026": 408,
+      "SUP-033": 405,
+      "SUP-028": 399,
+      "SUP-007": 398
+    }
+  },
+  "SupplierRegion": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 5,
+    "cardinality_ratio": 0.0003,
+    "business_meaning": "Geographic region of the supplier; proxy for logistics complexity.",
+    "top_categories": {
+      "Central": 4868,
+      "South": 3409,
+      "North": 2997,
+      "East": 2645,
+      "West": 1156
+    }
+  },
+  "WarehouseID": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 12,
+    "cardinality_ratio": 0.0008,
+    "business_meaning": "Destination warehouse for the order; drives capacity and regional risk.",
+    "top_categories": {
+      "WH-09": 1401,
+      "WH-12": 1279,
+      "WH-01": 1272,
+      "WH-03": 1263,
+      "WH-06": 1255
+    }
+  },
+  "WarehouseRegion": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 3,
+    "cardinality_ratio": 0.0002,
+    "business_meaning": "Geographic region of the receiving warehouse.",
+    "top_categories": {
+      "North": 6384,
+      "Central": 4930,
+      "South": 3761
+    }
+  },
+  "WarehouseCapacity": {
+    "dtype": "int64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 12,
+    "cardinality_ratio": 0.0008,
+    "business_meaning": "Max storage capacity (units) of the warehouse; used for inventory coverage ratios.",
+    "mean": 27082.82341625207,
+    "median": 26129.0,
+    "std": 12008.196463293052,
+    "min": 5995.0,
+    "max": 44883.0,
+    "skewness": -0.20591829557155703,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  },
+  "ProductCategory": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 8,
+    "cardinality_ratio": 0.0005,
+    "business_meaning": "FMCG product line; different categories have different shelf life & demand volatility.",
+    "top_categories": {
+      "Staples": 2009,
+      "Beverages": 1933,
+      "Personal Care": 1882,
+      "Snacks": 1870,
+      "Dairy": 1848
+    }
+  },
+  "ShelfLifeDays": {
+    "dtype": "int64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 8,
+    "cardinality_ratio": 0.0005,
+    "business_meaning": "Typical shelf life of the product category in days; affects urgency of delivery.",
+    "mean": 69.89824212271974,
+    "median": 60.0,
+    "std": 55.27591658147096,
+    "min": 7.0,
+    "max": 180.0,
+    "skewness": 0.8193767180671149,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  },
+  "TransportMode": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 4,
+    "cardinality_ratio": 0.0003,
+    "business_meaning": "Mode of shipment (Road/Rail/Air/Sea); major driver of cost and lead time.",
+    "top_categories": {
+      "Road": 7537,
+      "Sea": 2997,
+      "Rail": 2985,
+      "Air": 1556
+    }
+  },
+  "DistanceKM": {
+    "dtype": "float64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 14621,
+    "cardinality_ratio": 0.9699,
+    "business_meaning": "Distance between supplier and warehouse; drives lead time and shipping cost.",
+    "mean": 1487.9459383084577,
+    "median": 1504.53,
+    "std": 909.3525295003167,
+    "min": -2993.43,
+    "max": 2999.54,
+    "skewness": -0.4062055872496018,
+    "outlier_count_iqr": 88,
+    "negative_value_count": 170
+  },
+  "PlannedLeadTimeDays": {
+    "dtype": "float64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 1138,
+    "cardinality_ratio": 0.0755,
+    "business_meaning": "Expected/contracted delivery time based on mode + distance.",
+    "mean": 6.88166368159204,
+    "median": 5.74,
+    "std": 3.8116370253101204,
+    "min": 1.06,
+    "max": 15.75,
+    "skewness": 1.0550633277731474,
+    "outlier_count_iqr": 2148,
+    "negative_value_count": 0
+  },
+  "ActualLeadTimeDays": {
+    "dtype": "float64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 1818,
+    "cardinality_ratio": 0.1206,
+    "business_meaning": "Realized delivery time; compared to planned to derive delay.",
+    "mean": 8.205825538971808,
+    "median": 7.16,
+    "std": 4.142225561127115,
+    "min": 1.0,
+    "max": 22.47,
+    "skewness": 0.8601701985631117,
+    "outlier_count_iqr": 636,
+    "negative_value_count": 0
+  },
+  "OrderQuantity": {
+    "dtype": "int64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 4703,
+    "cardinality_ratio": 0.312,
+    "business_meaning": "Units ordered; relates to demand and inventory planning.",
+    "mean": 2544.5917081260363,
+    "median": 2544.0,
+    "std": 1430.8327088830383,
+    "min": 50.0,
+    "max": 4999.0,
+    "skewness": -0.011922904650973851,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  },
+  "UnitCost": {
+    "dtype": "float64",
+    "missing_count": 306,
+    "missing_pct": 2.03,
+    "unique_count": 2443,
+    "cardinality_ratio": 0.1621,
+    "business_meaning": "Cost per unit from supplier; feeds total cost calculations.",
+    "mean": 12.731273613650213,
+    "median": 12.76,
+    "std": 7.037466194616223,
+    "min": 0.5,
+    "max": 25.0,
+    "skewness": -0.0015921579210799019,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  },
+  "ShippingCost": {
+    "dtype": "float64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 14013,
+    "cardinality_ratio": 0.9296,
+    "business_meaning": "Total freight cost for the shipment.",
+    "mean": 768.5884908789386,
+    "median": 345.52,
+    "std": 1378.7166453250172,
+    "min": 0.18,
+    "max": 13021.79,
+    "skewness": 4.455716946996913,
+    "outlier_count_iqr": 1062,
+    "negative_value_count": 0
+  },
+  "InventoryLevel": {
+    "dtype": "float64",
+    "missing_count": 219,
+    "missing_pct": 1.453,
+    "unique_count": 11721,
+    "cardinality_ratio": 0.7775,
+    "business_meaning": "Current stock at the destination warehouse at order time.",
+    "mean": 13576.910743134087,
+    "median": 11210.5,
+    "std": 10484.400909594038,
+    "min": 0.0,
+    "max": 44808.0,
+    "skewness": 0.7823270271840304,
+    "outlier_count_iqr": 70,
+    "negative_value_count": 0
+  },
+  "ReorderPoint": {
+    "dtype": "int64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 12,
+    "cardinality_ratio": 0.0008,
+    "business_meaning": "Inventory threshold at which replenishment should trigger.",
+    "mean": 4062.0819237147593,
+    "median": 3919.0,
+    "std": 1801.2667475885328,
+    "min": 899.0,
+    "max": 6732.0,
+    "skewness": -0.20594216559257614,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  },
+  "CustomerPriority": {
+    "dtype": "str",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 3,
+    "cardinality_ratio": 0.0002,
+    "business_meaning": "Business priority tier of the customer/order (Standard/High/Critical).",
+    "top_categories": {
+      "Standard": 9135,
+      "High": 4433,
+      "Critical": 1507
+    }
+  },
+  "IsDelayed": {
+    "dtype": "int64",
+    "missing_count": 0,
+    "missing_pct": 0.0,
+    "unique_count": 2,
+    "cardinality_ratio": 0.0001,
+    "business_meaning": "TARGET VARIABLE - 1 if shipment arrived later than planned lead time + 1 day buffer, else 0.",
+    "mean": 0.5732669983416252,
+    "median": 1.0,
+    "std": 0.4946192229268026,
+    "min": 0.0,
+    "max": 1.0,
+    "skewness": -0.29629547969950815,
+    "outlier_count_iqr": 0,
+    "negative_value_count": 0
+  }
+}
