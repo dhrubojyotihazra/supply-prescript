@@ -1,227 +1,139 @@
-# SupplyPrescript — Week 1: Predictive Analytics Engine
+# SupplyPrescript: Closed-Loop Prescriptive Analytics
 
-**Closed-Loop Prescriptive Analytics for Intelligent Supply Chain Decision Support**
-
-This repository contains the Week-1 deliverable of SupplyPrescript: a production-grade
-machine learning pipeline that predicts the probability a shipment will be delayed,
-`P(Delay | X)`, using an XGBoost classifier trained on shipment, supplier, logistics,
-and macro-risk features.
-
-Later weeks will add a prescriptive optimization layer (recommended corrective actions)
-on top of this predictive engine, served via FastAPI and backed by PostgreSQL.
+**Domain:** Supply Chain Operations & Operations Research  
+**GitHub Repository:** [dhrubojyotihazra/supply-prescript](https://github.com/dhrubojyotihazra/supply-prescript)  
 
 ---
 
-## 1. Project Architecture
+## 📖 Overview & Use Case
 
-```
+Predictive analytics (e.g., predicting a supply chain delay) are now standard, but they only tell you *what* will happen. The human operator still has to figure out *what to do*. Furthermore, standard dashboards don't learn; if an operator makes a decision, the system rarely tracks whether that decision actually worked.
+
+**SupplyPrescript** bridges this gap. It integrates machine learning forecasts with a mathematical optimization solver to prescribe optimal actions, writes the operator's decision back to the database, tracks real-world outcomes, and retrains the predictive model based on actual performance (closing the loop).
+
+### 💡 Use Case Example
+A logistics manager is warned by the predictive model of an impending 14-day delay for microchips. Instead of stopping there, the **SupplyPrescript** engine runs a linear optimization algorithm and prescribes three mathematically optimal alternatives:
+*   **Choice A:** Pay \$15k for Air Freight.
+*   **Choice B:** Buy from a secondary supplier at a 10% premium.
+*   **Choice C:** Delay the final product launch.
+
+The manager clicks **Choice A** directly in the dashboard. The system writes this decision back to the operational database. Three weeks later, the system evaluates the outcome—learning that air freight actually cost \$18k—and adjusts its future optimization weights accordingly (Closed-Loop Analytics).
+
+---
+
+## 🏗️ Project Architecture & Directory Layout
+
+```text
 SupplyPrescript/
+├── api/                           # FastAPI backend server & database connection
+│   ├── database.py                # SQLAlchemy engine & Supabase connection
+│   ├── main.py                    # REST API routes (/warehouses, /prescribe, /execute-decision)
+│   ├── models.py                  # PostgreSQL ORM models (warehouses, decisions, outcomes)
+│   └── schemas.py                 # Pydantic request/response validation schemas
 │
-├── engine/                        # Serialized model + preprocessing artifacts
-│   ├── xgboost_model.joblib       # Trained XGBoost classifier
-│   ├── preprocessing_pipeline.pkl # Fitted PreprocessingPipeline (full object)
-│   ├── feature_columns.pkl        # Ordered list of final model feature names
-│   ├── label_encoders.pkl         # Ordinal category -> integer mappings
-│   └── train_test_split.pkl       # Held-out test split (for evaluate_model.py)
+├── engine/                        # Serialized ML models & optimization logic
+│   ├── xgboost_model.joblib       # Trained XGBoost delay classifier (87.99% accuracy)
+│   ├── predictive.py              # XGBoost risk prediction service
+│   ├── prescriptive.py            # SciPy linprog optimization solver service
+│   └── preprocessing_pipeline.pkl # Fitted preprocessing pipeline
 │
-├── dataset/
-│   └── supply_chain_mock.csv      # Synthetic 20k+ row supply chain dataset
+├── frontend/                      # React + Vite UI Dashboard application
+│   ├── src/
+│   │   ├── components/            # Header, MonitorTab, Drawer, OutcomesTab
+│   │   ├── App.jsx                # Main application shell
+│   │   └── index.css              # Dark mode glassmorphic styling
+│   └── package.json
 │
-├── notebooks/                     # Reserved for exploratory analysis
+├── data/                          # Dataset repository
+│   ├── FMCG_data.csv              # Main 22,149-row supply chain dataset
+│   └── supply_chain_mock.csv      # Synthetic ML training dataset
 │
-├── scripts/
+├── scripts/                       # Machine Learning & Synthetic Data Scripts
 │   ├── generate_dataset.py        # Synthetic dataset generator
-│   ├── preprocessing.py           # Reusable preprocessing/feature-engineering pipeline
-│   ├── train_model.py             # Training + hyperparameter tuning + serialization
-│   ├── evaluate_model.py          # Metrics, plots, SHAP explainability
-│   └── predict.py                 # CLI + importable inference module
+│   ├── preprocessing.py           # Feature engineering & missing value pipeline
+│   ├── train_model.py             # XGBoost model training & hyperparameter tuning
+│   ├── evaluate_model.py          # Model evaluation, SHAP explainability & ROC metrics
+│   ├── predict.py                 # ML inference script
+│   └── solver.py                  # Linear programming optimization solver
 │
-├── reports/                       # Generated evaluation artifacts (plots, metrics.json)
+├── reports/                       # Generated evaluation plots & metric JSONs
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── feature_importance.png
+│   └── metrics.json
 │
-├── requirements.txt
-└── README.md
-```
-
-### Pipeline flow
-
-```
-generate_dataset.py  -->  dataset/supply_chain_mock.csv
-                              │
-                              ▼
-                     preprocessing.py (imported by train_model.py)
-                              │
-                              ▼
-train_model.py --> RandomizedSearchCV (Stratified 5-Fold) --> engine/*.joblib, *.pkl
-                              │
-                              ▼
-evaluate_model.py --> reports/*.png, reports/metrics.json, classification_report.txt
-                              │
-                              ▼
-predict.py --> ShipmentDelayPredictor (CLI or importable for future FastAPI service)
+├── .agents/                       # Custom Workspace Skills & Instructions
+│   └── skills/
+│       ├── supply_prescript_spec/
+│       └── supply_prescript_ui_designer/
+│
+├── REVIEW_PREPARATION.md          # Official Axlero/IntelleQ Review Presentation Guide
+├── TEAM_EXPLAINER.md              # Team Roles, LaTeX math formulas, & Mermaid diagrams
+├── seed_data.py                   # Supabase PostgreSQL database seeder script
+├── requirements.txt               # Unified project python dependencies
+└── README.md                      # Master project documentation
 ```
 
 ---
 
-## 2. Dataset Generation (`scripts/generate_dataset.py`)
+## 🛠️ Machine Learning Engine (`scripts/`)
 
-Generates **20,100 rows** (20,000 base + injected duplicates) of synthetic but
-business-realistic supply chain data across 45+ columns spanning supplier
-attributes, logistics operations, shipment characteristics, macro/geopolitical
-risk, and calendar features.
+The predictive engine uses an **XGBoost Classifier** trained on shipment, supplier, logistics, and macro-risk features:
 
-Key design choices:
-
-- **Non-random target**: `Delay` is sampled from a logistic risk function of
-  the generated features (lead-time deviation, weather severity, port
-  congestion, route/geopolitical risk, supplier reliability, holiday impact,
-  etc.), so the label carries genuine, learnable signal rather than noise.
-- **Realistic data quality issues**: ~2–4% missing values injected into six
-  operationally-plausible columns, plus a small number of duplicate rows —
-  giving the preprocessing pipeline real work to do.
-- **Reproducibility**: all sampling uses `numpy.random.default_rng(42)`.
-
-Run:
-```bash
-python scripts/generate_dataset.py
-```
+1. **Synthetic Dataset Generation (`scripts/generate_dataset.py`):**
+   Generates realistic supply chain data across 45+ columns spanning supplier attributes, logistics operations, port congestion, and weather risk.
+2. **Data Preprocessing (`scripts/preprocessing.py`):**
+   Implements a `PreprocessingPipeline` class with strict `fit_transform` (train) and `transform` (test/inference) separation to avoid data leakage.
+3. **Model Training & Tuning (`scripts/train_model.py`):**
+   Uses `RandomizedSearchCV` with 5-fold Stratified Cross-Validation to optimize hyperparameters. Achieves **87.99% validation accuracy**.
+4. **Evaluation & Explainability (`scripts/evaluate_model.py`):**
+   Generates confusion matrices, ROC curves, and SHAP feature importance plots saved to `reports/`.
 
 ---
 
-## 3. Data Preprocessing & Feature Engineering (`scripts/preprocessing.py`)
+## 📐 Mathematical Prescriptive Solver (`engine/prescriptive.py`)
 
-Implemented as a single `PreprocessingPipeline` class with strict
-`fit_transform` (train) / `transform` (test & inference) separation to avoid
-data leakage. Steps:
+When a delay risk is detected, the prescriptive engine runs a **SciPy Linear Programming (`linprog`) solver** to minimize total shipping costs subject to constraints:
 
-1. **Schema validation** — fails fast with a clear `DataValidationError` if
-   required columns are missing.
-2. **Duplicate removal** — exact-row de-duplication.
-3. **Missing value handling** — median imputation for numeric columns, mode
-   imputation for categoricals.
-4. **Outlier handling** — IQR-based clipping, bounds fit on training data and
-   reused at inference time.
-5. **Feature engineering** — 5 derived features: `Lead_Time_Deviation`,
-   `Lead_Time_Deviation_Ratio`, `Risk_Composite_Index`, `Cost_Per_Kg`,
-   `Supplier_Reliability_Score`.
-6. **Encoding**:
-   - Ordinal (`Supplier_Risk`, `Order_Priority`, `Production_Status`) — explicit
-     ordinal integer mapping.
-   - Nominal (country, carrier, warehouse, etc.) — one-hot encoding.
-7. **Feature scaling** — `StandardScaler` fit on numeric + engineered columns.
-8. **Feature selection** — drops zero-variance columns and prunes columns with
-   pairwise correlation > 0.97 to reduce redundancy.
-9. **Train/test split** — stratified 80/20 split, `random_state=42`.
+$$\min_{x_1, \dots, x_n} \sum_{i=1}^{n} c_i \cdot x_i$$
 
-The entire fitted pipeline (encoders, clip bounds, scaler, final feature
-column list) is serialized as a single object to `engine/preprocessing_pipeline.pkl`,
-guaranteeing train/serve consistency for Week-2 API integration.
+**Subject to:**
+1. **Capacity Bounds:** $0 \le x_i \le \text{Capacity}_i$
+2. **Budget Constraint:** $\sum_{i=1}^{n} c_i \cdot x_i \le \text{Total Budget}$
+3. **Demand Constraint:** $\sum_{i=1}^{n} x_i \ge \text{Total Demand}$
+
+Outputs 3 action choices (**Choice A: High Budget/Fast**, **Choice B: Medium Budget/Balanced**, **Choice C: Low Budget/Economy**).
 
 ---
 
-## 4. Model Training & Hyperparameter Tuning (`scripts/train_model.py`)
+## 📅 Week-Wise Development Plan & Status
 
-- **Algorithm**: `XGBClassifier` (`objective="binary:logistic"`, `eval_metric="auc"`,
-  `tree_method="hist"`).
-- **Class imbalance handling**: `scale_pos_weight` computed from the training
-  split's class ratio.
-- **Tuning**: `RandomizedSearchCV` (30 candidates) over `learning_rate`,
-  `max_depth`, `n_estimators`, `subsample`, `colsample_bytree`, `gamma`,
-  `min_child_weight`, scored on ROC AUC with **Stratified 5-Fold** cross
-  validation (`random_state=42` throughout).
-- **Serialization**: best estimator + all preprocessing artifacts saved via
-  `joblib` to `engine/`.
+### 🚀 Week 1: Predictive Baseline & App Scaffolding [COMPLETED]
+*   **ML Engine:** Trained baseline XGBoost model on `FMCG_data.csv` (87.99% accuracy) saved to `engine/xgboost_model.joblib`.
+*   **Database & API:** Connected to Supabase PostgreSQL cloud database, created `warehouses`, `decisions`, and `outcomes` tables, and seeded 22,149 records.
 
-Run:
-```bash
-python scripts/train_model.py
-```
+### 📊 Week 2: Mathematical Optimization & Prescriptive UI/API [COMPLETED]
+*   **Optimization Service:** Integrated SciPy `linprog` optimizer into `engine/prescriptive.py` and exposed `POST /prescribe` API.
+*   **React Dashboard:** Built the dark-mode React UI (`frontend/`) with paginated table, prescriptive cards drawer, real-time database write-back, and outcome logger.
 
-Optional environment variable `SP_SEARCH_ITER` controls the number of
-RandomizedSearchCV candidates (default `30`) for faster iteration during
-development.
+### 🔁 Week 3: Closed-Loop Evaluation & ROI Analytics [UPCOMING]
+*   Compare predicted decision costs against actual real-world outcomes logged in the `outcomes` table.
 
 ---
 
-## 5. Model Evaluation & Explainability (`scripts/evaluate_model.py`)
+## 🚀 How to Run the Project Locally
 
-Loads the serialized model and held-out test split and produces:
-
-- Accuracy, Precision, Recall, F1, ROC AUC → `reports/metrics.json`
-- Full `classification_report` → `reports/classification_report.txt`
-- Confusion matrix → `reports/confusion_matrix.png`
-- ROC curve → `reports/roc_curve.png`
-- Precision-Recall curve → `reports/precision_recall_curve.png`
-- XGBoost native feature importance (top 20) → `reports/feature_importance.png`
-- **SHAP summary (beeswarm) plot** → `reports/shap_summary.png`
-- **SHAP bar plot** (mean |SHAP value|) → `reports/shap_bar.png`
-
-Run:
-```bash
-python scripts/evaluate_model.py
-```
-
-### Target performance
-
-| Metric   | Target | 
-|----------|--------|
-| Accuracy | > 0.90 |
-| ROC AUC  | > 0.92 |
-
-Actual achieved values are written to `reports/metrics.json` after each
-training/evaluation cycle — see that file for the current run's results.
-
----
-
-## 6. Prediction / Inference (`scripts/predict.py`)
-
-Exposes `ShipmentDelayPredictor`, a small class that loads the serialized
-pipeline + model once and exposes `.predict(raw_df)`, returning
-`Delay_Probability` and `Delay_Prediction` for each row. This class is the
-intended integration point for the Week-2 FastAPI service (`POST /predict`).
-
-CLI usage:
-```bash
-python scripts/predict.py --input dataset/new_shipments.csv --output predictions.csv
-```
-
-Library usage:
-```python
-from scripts.predict import ShipmentDelayPredictor
-
-predictor = ShipmentDelayPredictor()
-result_df = predictor.predict(new_shipments_df)
-```
-
----
-
-## 7. Coding Standards
-
-- PEP-8 compliant, fully modular, docstrings on every public function/class.
-- `logging` used throughout (no `print()` in library code).
-- Explicit custom exceptions (`DataValidationError`, `ModelTrainingError`,
-  `ModelEvaluationError`, `PredictionError`) with descriptive messages.
-- Random seed fixed at `42` everywhere randomness is involved, for full
-  reproducibility.
-
----
-
-## 8. Setup
-
+### 1. Start the FastAPI Backend
 ```bash
 pip install -r requirements.txt
-
-python scripts/generate_dataset.py
-python scripts/train_model.py
-python scripts/evaluate_model.py
+uvicorn api.main:app --reload
 ```
+*Backend runs on `http://127.0.0.1:8000` (Swagger Docs at `http://127.0.0.1:8000/docs`).*
 
----
-
-## 9. Roadmap (beyond Week 1)
-
-- **Week 2**: FastAPI service wrapping `ShipmentDelayPredictor` (`/predict`,
-  `/health`, `/model-info` endpoints), PostgreSQL persistence of predictions.
-- **Week 3+**: Prescriptive optimization layer (mathematical optimization over
-  recommended corrective actions — e.g., carrier reassignment, expedited
-  shipping, safety-stock adjustment) conditioned on the Week-1 delay
-  probability, exposed to a React/Retool operations dashboard.
+### 2. Start the React Frontend Dashboard
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*Frontend runs on `http://localhost:5173`.*

@@ -1,5 +1,0 @@
-Mode,Cost_Per_Kg_USD,Base_Fee_USD,CO2_Kg_Per_Kg_Shipped,Speed_Days_Per_1000Km
-Air,6.2,180.0,1.05,0.45
-Sea,0.55,320.0,0.015,3.1
-Rail,1.1,150.0,0.03,1.4
-Road,1.85,90.0,0.12,1.05
