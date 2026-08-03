@@ -33,7 +33,7 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
           warehouse_id: warehouse.warehouse_id,
           selected_option: choice.label,
           prescribed_cost: choice.total_cost,
-          expected_delay_days: choice.label.includes('High') ? 2 : choice.label.includes('Medium') ? 5 : 14
+          expected_delay_days: choice.expected_delay_days || 5
         })
       });
 
@@ -54,7 +54,7 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
       <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
         <div className="drawer-header">
           <div>
-            <h2>Prescriptive Solver</h2>
+            <h2 style={{ fontSize: '1.3rem', fontWeight: 800 }}>Prescriptive Optimization Solver</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
               Target: <strong style={{ color: '#fff' }}>{warehouse.warehouse_id}</strong> ({warehouse.zone} Zone)
             </p>
@@ -63,44 +63,52 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
         </div>
 
         <div>
-          <h3 style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
-            Warehouse Specs
+          <h3 style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 700 }}>
+            Warehouse Operational Specs
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-            <div>Location: <strong>{warehouse.location_type}</strong></div>
-            <div>Capacity: <strong>{warehouse.capacity_size}</strong></div>
-            <div>Distance: <strong>{warehouse.dist_from_hub} km</strong></div>
-            <div>Workers: <strong>{warehouse.workers_num}</strong></div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.875rem' }}>
+            <div>Location: <strong style={{ color: '#fff' }}>{warehouse.location_type}</strong></div>
+            <div>Capacity: <strong style={{ color: '#fff' }}>{warehouse.capacity_size}</strong></div>
+            <div>Distance: <strong style={{ color: '#fff' }}>{warehouse.dist_from_hub} km</strong></div>
+            <div>Workers: <strong style={{ color: '#fff' }}>{warehouse.workers_num}</strong></div>
           </div>
         </div>
 
         <hr style={{ borderColor: 'var(--border-color)' }} />
 
         <div>
-          <h3 style={{ fontSize: '1rem', marginBottom: '1rem' }}>
-            Mathematical Optimization Prescriptions (SciPy linprog)
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>
+            Mathematical Optimization Choices (SciPy linprog)
           </h3>
 
           {loading ? (
-            <p style={{ color: 'var(--text-muted)' }}>Running SciPy optimization solver...</p>
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+              Running SciPy linear programming solver...
+            </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {prescriptions.map((choice, idx) => (
                 <div key={idx} className="option-card">
-                  <div className="option-title">{choice.label}</div>
+                  <div className="option-header">
+                    <span className="option-title">{choice.label}</span>
+                    <span className="option-badge">Est. Delay: {choice.expected_delay_days || 5} Days</span>
+                  </div>
+                  
                   <div className="option-metrics">
-                    <span>Budget Limit: ${choice.budget_limit.toLocaleString()}</span>
-                    <span className="metric-highlight">Cost: ${choice.total_cost.toLocaleString()}</span>
+                    <span>Budget Limit: ${choice.budget_limit?.toLocaleString()}</span>
+                    <span className="metric-highlight">Cost: ${choice.total_cost?.toLocaleString()}</span>
                   </div>
+                  
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Allocations (W1-W5): [{choice.allocations.join(', ')}]
+                    Allocations (W1-W5): [{choice.allocations?.join(', ')}]
                   </div>
+
                   <button
-                    className="btn-primary"
+                    className="btn-execute"
                     disabled={executing}
                     onClick={() => handleExecute(choice)}
                   >
-                    {executing ? 'Executing...' : 'Execute Decision (Write-Back)'}
+                    {executing ? 'Writing to Supabase...' : '⚡ Execute Decision (Write-Back to PostgreSQL)'}
                   </button>
                 </div>
               ))}
