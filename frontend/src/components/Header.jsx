@@ -4,7 +4,20 @@ export default function Header({ activeTab, setActiveTab }) {
   return (
     <header className="app-header">
       <div className="logo-group">
-        <div className="logo-icon">SP</div>
+        <img
+          src="/logo.png"
+          alt="SupplyPrescript Logo"
+          style={{
+            height: '36px',
+            width: 'auto',
+            borderRadius: '6px',
+            border: '2px solid #000000',
+            boxShadow: '2px 2px 0px #000000',
+            objectFit: 'contain',
+            background: '#ffffff',
+            padding: '2px'
+          }}
+        />
         <div>
           <h1 className="brand-title">SupplyPrescript</h1>
         </div>
