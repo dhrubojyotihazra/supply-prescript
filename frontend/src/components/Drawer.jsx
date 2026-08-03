@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://supply-prescript-api.onrender.com';
+
 export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +21,7 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
     if (!warehouse) return;
 
     setLoading(true);
-    fetch('http://localhost:8000/prescribe', {
+    fetch(`${API_BASE}/prescribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -43,7 +47,7 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
   const handleExecute = async (choice) => {
     setExecuting(true);
     try {
-      const res = await fetch('http://localhost:8000/execute-decision', {
+      const res = await fetch(`${API_BASE}/execute-decision`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -74,7 +78,7 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
     setChatLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/chat-assistant', {
+      const res = await fetch(`${API_BASE}/chat-assistant`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

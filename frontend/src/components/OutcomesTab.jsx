@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://supply-prescript-api.onrender.com';
+
 export default function OutcomesTab({ onOutcomeLogged }) {
   const [decisions, setDecisions] = useState([]);
   const [decisionId, setDecisionId] = useState('');
@@ -10,7 +14,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
 
   const fetchDecisions = () => {
     setLoadingDecisions(true);
-    fetch('http://localhost:8000/decisions?skip=0&limit=10')
+    fetch(`${API_BASE}/decisions?skip=0&limit=10`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -44,7 +48,7 @@ export default function OutcomesTab({ onOutcomeLogged }) {
 
     setSubmitting(true);
     try {
-      const res = await fetch('http://localhost:8000/log-outcome', {
+      const res = await fetch(`${API_BASE}/log-outcome`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

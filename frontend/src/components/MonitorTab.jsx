@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:8000'
+  : 'https://supply-prescript-api.onrender.com';
+
 export default function MonitorTab({ onSelectWarehouse }) {
   const [warehouses, setWarehouses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +14,7 @@ export default function MonitorTab({ onSelectWarehouse }) {
   useEffect(() => {
     setLoading(true);
     const skip = page * limit;
-    fetch(`http://localhost:8000/warehouses?skip=${skip}&limit=${limit}`)
+    fetch(`${API_BASE}/warehouses?skip=${skip}&limit=${limit}`)
       .then((res) => res.json())
       .then((data) => {
         setWarehouses(data);
