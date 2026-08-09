@@ -42,7 +42,8 @@ class ChatRequest(BaseModel):
     dist_from_hub: Optional[float] = 100.0
     product_wg_ton: Optional[float] = 15000.0
 
-@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
+@app.head("/", response_class=HTMLResponse)
 def read_root():
     html_content = """
     <!DOCTYPE html>
@@ -194,7 +195,8 @@ def read_root():
     """
     return html_content
 
-@app.api_route("/health", methods=["GET", "HEAD"])
+@app.get("/health")
+@app.head("/health")
 def health_check():
     return {"status": "healthy"}
 
