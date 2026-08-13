@@ -270,6 +270,116 @@ def chat_assistant(req: ChatRequest):
         "reply": response
     }
 
+@app.get("/decisions", response_model=List[schemas.DecisionResponse])
+def get_decisions(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=200),
+    db: Session = Depends(get_db)
+):
+    decisions = db.query(models.Decision).order_by(models.Decision.id.desc()).offset(skip).limit(limit).all()
+    return decisions
+
+@app.get("/roi-analytics")
+def get_roi_analytics(db: Session = Depends(get_db)):
+    """
+    Computes Decision ROI metrics: cost savings, delay reduction, positive outcome rate,
+    and per-option breakdown to power the Week 3 analytics view.
+    """
+    from sqlalchemy import func
+
+    decisions = db.query(models.Decision).all()
+    outcomes = db.query(models.Outcome).all()
+
+    if not decisions:
+        return {
+            "total_decisions": 0,
+            "evaluated_outcomes": 0,
+            "positive_outcomes": 0,
+            "positive_outcome_rate": 0,
+            "total_prescribed_cost": 0,
+            "total_actual_cost": 0,
+            "total_cost_savings": 0,
+            "avg_prescribed_delay": 0,
+            "avg_actual_delay": 0,
+            "avg_delay_improvement": 0,
+            "option_breakdown": [],
+            "recent_outcomes": []
+        }
+
+    outcome_map = {o.decision_id: o for o in outcomes}
+    decision_map = {d.id: d for d in decisions}
+
+    evaluated = [o for o in outcomes if o.decision_id in decision_map]
+    positive = [
+        o for o in evaluated
+        if o.actual_cost <= decision_map[o.decision_id].prescribed_cost
+        and o.actual_delay_days <= decision_map[o.decision_id].expected_delay_days
+    ]
+
+    total_prescribed = sum(d.prescribed_cost for d in decisions)
+    total_actual = sum(o.actual_cost for o in evaluated) if evaluated else 0
+    cost_savings = total_prescribed - total_actual if evaluated else 0
+
+    avg_prescribed_delay = sum(d.expected_delay_days for d in decisions) / len(decisions)
+    avg_actual_delay = sum(o.actual_delay_days for o in evaluated) / len(evaluated) if evaluated else 0
+    delay_improvement = avg_prescribed_delay - avg_actual_delay if evaluated else 0
+
+    # Per-option breakdown
+    from collections import defaultdict
+    option_stats = defaultdict(lambda: {"count": 0, "positive": 0, "total_savings": 0})
+    for o in evaluated:
+        d = decision_map[o.decision_id]
+        opt = d.selected_option
+        option_stats[opt]["count"] += 1
+        savings = d.prescribed_cost - o.actual_cost
+        option_stats[opt]["total_savings"] += savings
+        if o.actual_cost <= d.prescribed_cost and o.actual_delay_days <= d.expected_delay_days:
+            option_stats[opt]["positive"] += 1
+
+    option_breakdown = [
+        {
+            "option": k,
+            "count": v["count"],
+            "positive": v["positive"],
+            "success_rate": round(v["positive"] / v["count"] * 100, 1) if v["count"] > 0 else 0,
+            "total_savings": round(v["total_savings"], 2)
+        }
+        for k, v in option_stats.items()
+    ]
+
+    # Recent outcomes (last 10) with decision details
+    recent_outcomes = []
+    for o in sorted(evaluated, key=lambda x: x.id, reverse=True)[:10]:
+        d = decision_map[o.decision_id]
+        recent_outcomes.append({
+            "outcome_id": o.id,
+            "decision_id": o.decision_id,
+            "warehouse_id": d.warehouse_id,
+            "selected_option": d.selected_option,
+            "prescribed_cost": d.prescribed_cost,
+            "actual_cost": o.actual_cost,
+            "cost_saving": round(d.prescribed_cost - o.actual_cost, 2),
+            "prescribed_delay": d.expected_delay_days,
+            "actual_delay": o.actual_delay_days,
+            "delay_improvement": d.expected_delay_days - o.actual_delay_days,
+            "is_positive": o.actual_cost <= d.prescribed_cost and o.actual_delay_days <= d.expected_delay_days
+        })
+
+    return {
+        "total_decisions": len(decisions),
+        "evaluated_outcomes": len(evaluated),
+        "positive_outcomes": len(positive),
+        "positive_outcome_rate": round(len(positive) / len(evaluated) * 100, 1) if evaluated else 0,
+        "total_prescribed_cost": round(total_prescribed, 2),
+        "total_actual_cost": round(total_actual, 2),
+        "total_cost_savings": round(cost_savings, 2),
+        "avg_prescribed_delay": round(avg_prescribed_delay, 1),
+        "avg_actual_delay": round(avg_actual_delay, 1),
+        "avg_delay_improvement": round(delay_improvement, 1),
+        "option_breakdown": option_breakdown,
+        "recent_outcomes": recent_outcomes
+    }
+
 @app.post("/execute-decision", response_model=schemas.DecisionResponse, status_code=status.HTTP_201_CREATED)
 def execute_decision(decision: schemas.DecisionCreate, db: Session = Depends(get_db)):
     db_decision = models.Decision(

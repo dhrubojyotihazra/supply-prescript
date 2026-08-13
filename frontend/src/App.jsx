@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import MonitorTab from './components/MonitorTab';
 import OutcomesTab from './components/OutcomesTab';
+import ROITab from './components/ROITab';
 import Drawer from './components/Drawer';
 
 export default function App() {
@@ -27,6 +28,10 @@ export default function App() {
 
         {activeTab === 'outcomes' && (
           <OutcomesTab onOutcomeLogged={(msg) => showToast(msg)} />
+        )}
+
+        {activeTab === 'roi' && (
+          <ROITab />
         )}
       </main>
 

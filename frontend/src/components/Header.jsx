@@ -36,6 +36,13 @@ export default function Header({ activeTab, setActiveTab }) {
         >
           Closed-Loop Outcomes
         </button>
+        <button
+          className={`tab-btn ${activeTab === 'roi' ? 'active' : ''}`}
+          onClick={() => setActiveTab('roi')}
+          style={{ background: activeTab === 'roi' ? '#c084fc' : '#ffffff' }}
+        >
+          Decision ROI Analytics
+        </button>
       </div>
 
       <div className="status-badge">
