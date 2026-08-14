@@ -116,8 +116,15 @@ Outputs 3 action choices (**Choice A: High Budget/Fast**, **Choice B: Medium Bud
 *   **Optimization Service:** Integrated SciPy `linprog` optimizer into `engine/prescriptive.py` and exposed `POST /prescribe` API.
 *   **React Dashboard:** Built the dark-mode React UI (`frontend/`) with paginated table, prescriptive cards drawer, real-time database write-back, and outcome logger.
 
-### 🔁 Week 3: Closed-Loop Evaluation & ROI Analytics [UPCOMING]
-*   Compare predicted decision costs against actual real-world outcomes logged in the `outcomes` table.
+### 🔁 Week 3: Automated Remediation & Live Alerts [COMPLETED]
+*   **Circuit Breaker Logic:** Implemented `CircuitBreakerManager` (`engine/circuit_breaker.py`) with a **2.0% error rate threshold**.
+*   **DLQ Iceberg Stream Routing:** When stream error rate exceeds 2.0%, Flink/Stream engine automatically routes incoming payload to a **Dead Letter Queue (DLQ)** Iceberg table (`warehouses_dlq_stream`) [1.1.1].
+*   **Live WebSockets Alerts:** Connected circuit breaker status to React Flow UI via `@app.websocket("/ws/remediation")`, instantly turning affected pipeline nodes **RED** with pulsing glow.
+
+### ⏳ Week 4: Time Travel Queries & Snapshot Rollback [COMPLETED]
+*   **Iceberg Snapshot Isolation:** Implemented `IcebergTableManager` (`engine/iceberg_engine.py`) supporting immutable snapshot auditing and **Time Travel Queries** (`AS OF SNAPSHOT <id>`) to retrieve exact clean data state before anomalies.
+*   **1-Click Snapshot Rollback:** Integrated 1-click data restoration capability to revert main table pointers to pre-anomaly snapshots (`snap-1002`).
+*   **Detailed Incident Log UI:** Built a filterable incident audit log panel in React displaying trigger reasons, DLQ targets, snapshot references, pause/resume timestamps, and pause durations.
 
 ---
 
@@ -130,10 +137,16 @@ uvicorn api.main:app --reload
 ```
 *Backend runs on `http://127.0.0.1:8000` (Swagger Docs at `http://127.0.0.1:8000/docs`).*
 
-### 2. Start the React Frontend Dashboard
+### 2. Run Automated Remediation & Time Travel Tests
+```bash
+python scripts/test_remediation.py
+```
+
+### 3. Start the React Frontend Dashboard
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 *Frontend runs on `http://localhost:5173`.*
+
