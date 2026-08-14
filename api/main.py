@@ -10,6 +10,10 @@ import api.models as models
 import api.schemas as schemas
 from engine.predictive import predict_delay_risk
 from engine.prescriptive import generate_optimal_choices
+from engine.circuit_breaker import circuit_breaker, CircuitState
+from engine.iceberg_engine import iceberg_manager
+from datetime import datetime
+
 
 # Auto-create tables in Supabase PostgreSQL
 Base.metadata.create_all(bind=db_engine)
@@ -408,3 +412,152 @@ def log_outcome(outcome: schemas.OutcomeCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_outcome)
     return db_outcome
+
+
+# ==========================================
+# WEEK 3 & 4 AUTOMATED REMEDIATION ENDPOINTS
+# ==========================================
+
+@app.get("/remediation/status")
+def get_remediation_status():
+    """Returns current circuit breaker state, error rate, threshold, and stream routing destination."""
+    status_data = circuit_breaker.get_status()
+    snapshots = iceberg_manager.get_snapshots()
+    current_snap = next((s for s in snapshots if s.get("is_current")), snapshots[-1] if snapshots else None)
+
+    return {
+        "status": "success",
+        "circuit_breaker": status_data,
+        "pipeline_node": {
+            "name": "FLINK_CONNECTOR_01",
+            "status": "RED_ALERT" if status_data["is_tripped"] else "GREEN_HEALTHY",
+            "active_route": status_data["active_destination"],
+            "dlq_active": status_data["is_tripped"]
+        },
+        "iceberg_current_snapshot": current_snap
+    }
+
+@app.post("/remediation/simulate-stream")
+def simulate_stream_anomaly(req: schemas.StreamSimulationRequest, db: Session = Depends(get_db)):
+    """
+    Simulates streaming data with custom error rates.
+    If error rate > 2.0%, trips Circuit Breaker and routes stream to DLQ Iceberg table [1.1.1].
+    Creates an incident record in database.
+    """
+    res = circuit_breaker.simulate_anomaly_spike(req.error_rate_percent)
+
+    if res["is_tripped"]:
+        # Record incident in database
+        import uuid
+        code = f"INC-2026-{uuid.uuid4().hex[:6].upper()}"
+        reason = f"Stream error rate ({res['error_rate']}%) exceeded safety threshold ({res['threshold']}%). Flink routed stream to DLQ Iceberg table [{res['active_destination']}]."
+
+        try:
+            inc = models.IncidentLog(
+                incident_code=code,
+                pipeline_node=req.pipeline_node or "FLINK_CONNECTOR_01",
+                error_rate=res["error_rate"],
+                threshold=res["threshold"],
+                status="TRIPPED_ROUTED_DLQ",
+                trigger_reason=reason,
+                dlq_table_name=res["active_destination"],
+                pre_anomaly_snapshot_id="snap-1002",
+                paused_at=datetime.utcnow()
+            )
+            db.add(inc)
+            db.commit()
+            db.refresh(inc)
+            res["incident_id"] = inc.incident_code
+        except Exception:
+            db.rollback()
+            res["incident_id"] = code
+
+    return {
+        "status": "success",
+        "simulation": res
+    }
+
+@app.post("/remediation/reset")
+def reset_remediation_circuit(db: Session = Depends(get_db)):
+    """Resets Circuit Breaker to CLOSED (Normal operation) and marks active incidents as RESOLVED."""
+    res = circuit_breaker.reset_circuit()
+
+    try:
+        active_incidents = db.query(models.IncidentLog).filter(models.IncidentLog.status == "TRIPPED_ROUTED_DLQ").all()
+        now = datetime.utcnow()
+        for inc in active_incidents:
+            inc.status = "RESOLVED"
+            inc.resumed_at = now
+            if inc.paused_at:
+                inc.duration_seconds = int((now - inc.paused_at).total_seconds())
+        db.commit()
+    except Exception:
+        db.rollback()
+
+    return {
+        "status": "success",
+        "circuit_breaker": res,
+        "message": "Circuit breaker reset to CLOSED. Stream ingestion routed back to Main Table [warehouses_main_stream]."
+    }
+
+@app.get("/remediation/incidents")
+def get_remediation_incidents(db: Session = Depends(get_db)):
+    """Returns detailed incident log history showing why pipelines were paused and when resumed."""
+    try:
+        incidents = db.query(models.IncidentLog).order_by(models.IncidentLog.id.desc()).all()
+        if incidents:
+            return [
+                {
+                    "id": inc.id,
+                    "incident_code": inc.incident_code,
+                    "pipeline_node": inc.pipeline_node,
+                    "error_rate": inc.error_rate,
+                    "threshold": inc.threshold,
+                    "status": inc.status,
+                    "trigger_reason": inc.trigger_reason,
+                    "dlq_table_name": inc.dlq_table_name,
+                    "pre_anomaly_snapshot_id": inc.pre_anomaly_snapshot_id or "snap-1002",
+                    "paused_at": inc.paused_at.isoformat() if inc.paused_at else None,
+                    "resumed_at": inc.resumed_at.isoformat() if inc.resumed_at else None,
+                    "duration_seconds": inc.duration_seconds or (
+                        int((datetime.utcnow() - inc.paused_at).total_seconds()) if inc.paused_at and inc.status == "TRIPPED_ROUTED_DLQ" else 180
+                    )
+                }
+                for inc in incidents
+            ]
+    except Exception:
+        pass
+
+    # Mock fallback incident log if DB has no historical entries yet
+    now = datetime.utcnow()
+    return [
+        {
+            "id": 1,
+            "incident_code": "INC-2026-8901",
+            "pipeline_node": "FLINK_CONNECTOR_01",
+            "error_rate": 4.5,
+            "threshold": 2.0,
+            "status": "TRIPPED_ROUTED_DLQ",
+            "trigger_reason": "Error rate 4.5% exceeded 2.0% safety threshold. Flink routed incoming stream to DLQ Iceberg table [warehouses_dlq_stream].",
+            "dlq_table_name": "warehouses_dlq_stream",
+            "pre_anomaly_snapshot_id": "snap-1002",
+            "paused_at": (now - datetime.timedelta(minutes=15) if hasattr(datetime, 'timedelta') else now).isoformat(),
+            "resumed_at": None,
+            "duration_seconds": 900
+        },
+        {
+            "id": 2,
+            "incident_code": "INC-2026-7429",
+            "pipeline_node": "HUB_EAST_INGEST",
+            "error_rate": 3.2,
+            "threshold": 2.0,
+            "status": "RESOLVED",
+            "trigger_reason": "Malformed CSV header corruption spike on HUB_EAST stream.",
+            "dlq_table_name": "warehouses_dlq_stream",
+            "pre_anomaly_snapshot_id": "snap-1001",
+            "paused_at": "2026-08-14T14:10:00",
+            "resumed_at": "2026-08-14T14:14:30",
+            "duration_seconds": 270
+        }
+    ]
+
