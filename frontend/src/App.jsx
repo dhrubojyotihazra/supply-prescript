@@ -3,6 +3,7 @@ import Header from './components/Header';
 import MonitorTab from './components/MonitorTab';
 import OutcomesTab from './components/OutcomesTab';
 import ROITab from './components/ROITab';
+import RemediationTab from './components/RemediationTab';
 import Drawer from './components/Drawer';
 
 export default function App() {
@@ -33,7 +34,12 @@ export default function App() {
         {activeTab === 'roi' && (
           <ROITab />
         )}
+
+        {activeTab === 'remediation' && (
+          <RemediationTab />
+        )}
       </main>
+
 
       <Drawer
         warehouse={selectedWarehouse}
