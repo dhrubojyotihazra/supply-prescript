@@ -541,7 +541,7 @@ def get_remediation_incidents(db: Session = Depends(get_db)):
             "trigger_reason": "Error rate 4.5% exceeded 2.0% safety threshold. Flink routed incoming stream to DLQ Iceberg table [warehouses_dlq_stream].",
             "dlq_table_name": "warehouses_dlq_stream",
             "pre_anomaly_snapshot_id": "snap-1002",
-            "paused_at": (now - datetime.timedelta(minutes=15) if hasattr(datetime, 'timedelta') else now).isoformat(),
+            "paused_at": now.isoformat(),
             "resumed_at": None,
             "duration_seconds": 900
         },
@@ -560,4 +560,58 @@ def get_remediation_incidents(db: Session = Depends(get_db)):
             "duration_seconds": 270
         }
     ]
+
+
+# ==========================================
+# WEEK 4 ICEBERG TIME TRAVEL & ROLLBACK API
+# ==========================================
+
+@app.get("/iceberg/snapshots")
+def get_iceberg_snapshots(table_name: Optional[str] = None):
+    """Returns list of immutable Iceberg snapshots for snapshot isolation & time travel."""
+    snapshots = iceberg_manager.get_snapshots(table_name=table_name)
+    return {
+        "status": "success",
+        "total_snapshots": len(snapshots),
+        "snapshots": snapshots
+    }
+
+@app.post("/iceberg/time-travel")
+def execute_time_travel_query(req: schemas.TimeTravelQueryRequest):
+    """
+    Executes an Iceberg Time Travel query (AS OF SNAPSHOT <snapshot_id>).
+    Retrieves exact clean data state before anomaly occurred.
+    """
+    result = iceberg_manager.time_travel_query(req.snapshot_id)
+    if result.get("status") == "error":
+        raise HTTPException(status_code=404, detail=result["message"])
+    return result
+
+@app.post("/iceberg/rollback")
+def rollback_iceberg_snapshot(req: schemas.RollbackRequest, db: Session = Depends(get_db)):
+    """
+    Executes a 1-click snapshot rollback, restoring table pointers to pre-anomaly state.
+    Updates active incident log status to ROLLED_BACK.
+    """
+    res = iceberg_manager.rollback_to_snapshot(req.snapshot_id)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=400, detail=res["message"])
+
+    # Reset circuit breaker as part of rollback
+    circuit_breaker.reset_circuit()
+
+    try:
+        active_incidents = db.query(models.IncidentLog).filter(models.IncidentLog.status == "TRIPPED_ROUTED_DLQ").all()
+        now = datetime.utcnow()
+        for inc in active_incidents:
+            inc.status = "ROLLED_BACK"
+            inc.resumed_at = now
+            if inc.paused_at:
+                inc.duration_seconds = int((now - inc.paused_at).total_seconds())
+        db.commit()
+    except Exception:
+        db.rollback()
+
+    return res
+
 
