@@ -31,7 +31,7 @@ def test_circuit_breaker_threshold():
     assert reset_res["is_tripped"] is False
     assert reset_res["state"] == "CLOSED"
     assert reset_res["active_destination"] == "warehouses_main_stream"
-    print("✅ test_circuit_breaker_threshold passed successfully!")
+    print("[PASS] test_circuit_breaker_threshold passed successfully!")
 
 def test_iceberg_time_travel_and_rollback():
     mgr = IcebergTableManager()
@@ -49,7 +49,7 @@ def test_iceberg_time_travel_and_rollback():
     rb_res = mgr.rollback_to_snapshot("snap-1002")
     assert rb_res["status"] == "success"
     assert rb_res["restored_snapshot_id"] == "snap-1002"
-    print("✅ test_iceberg_time_travel_and_rollback passed successfully!")
+    print("[PASS] test_iceberg_time_travel_and_rollback passed successfully!")
 
 def test_api_remediation_endpoints():
     client = TestClient(app)
@@ -83,11 +83,11 @@ def test_api_remediation_endpoints():
     res6 = client.post("/remediation/reset")
     assert res6.status_code == 200
     assert res6.json()["status"] == "success"
-    print("✅ test_api_remediation_endpoints passed successfully!")
+    print("[PASS] test_api_remediation_endpoints passed successfully!")
 
 if __name__ == "__main__":
-    print("🧪 Running SupplyPrescript Week 3 & 4 Automated Test Suite...")
+    print("Running SupplyPrescript Week 3 & 4 Automated Test Suite...")
     test_circuit_breaker_threshold()
     test_iceberg_time_travel_and_rollback()
     test_api_remediation_endpoints()
-    print("🎉 ALL REMEDIATION & TIME TRAVEL TESTS PASSED!")
+    print("ALL REMEDIATION & TIME TRAVEL TESTS PASSED 100%!")
