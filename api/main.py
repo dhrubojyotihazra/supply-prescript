@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Depends, HTTPException, status, Query
+from fastapi import FastAPI, Depends, HTTPException, status, Query, WebSocket, WebSocketDisconnect
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
@@ -613,5 +614,35 @@ def rollback_iceberg_snapshot(req: schemas.RollbackRequest, db: Session = Depend
         db.rollback()
 
     return res
+
+
+# ==========================================
+# WEBSOCKET REAL-TIME LIVE ALERT SERVER
+# ==========================================
+
+@app.websocket("/ws/remediation")
+@app.websocket("/ws/pipeline")
+async def websocket_remediation_stream(websocket: WebSocket):
+    """
+    Live WebSocket endpoint connecting Circuit Breaker status to React Flow UI.
+    Pushes real-time stream telemetry and node alert status (GREEN -> RED on trip).
+    """
+    await websocket.accept()
+    # Push initial telemetry packet
+    initial_payload = get_remediation_status()
+    await websocket.send_json(initial_payload)
+
+    try:
+        while True:
+            # Client ping or heartbeat
+            data = await websocket.receive_text()
+            # Push latest state
+            current_payload = get_remediation_status()
+            await websocket.send_json(current_payload)
+    except WebSocketDisconnect:
+        pass
+    except Exception:
+        pass
+
 
 
