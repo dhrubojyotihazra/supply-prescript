@@ -275,16 +275,8 @@ def chat_assistant(req: ChatRequest):
         "reply": response
     }
 
-@app.get("/decisions", response_model=List[schemas.DecisionResponse])
-def get_decisions(
-    skip: int = Query(0, ge=0),
-    limit: int = Query(50, ge=1, le=200),
-    db: Session = Depends(get_db)
-):
-    decisions = db.query(models.Decision).order_by(models.Decision.id.desc()).offset(skip).limit(limit).all()
-    return decisions
-
 @app.get("/roi-analytics")
+
 def get_roi_analytics(db: Session = Depends(get_db)):
     """
     Computes Decision ROI metrics: cost savings, delay reduction, positive outcome rate,
