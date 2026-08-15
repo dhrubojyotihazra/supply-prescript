@@ -50,7 +50,15 @@ export default function Header({ activeTab, setActiveTab }) {
         >
           Decision ROI Analytics
         </button>
+        <button
+          className={`tab-btn ${activeTab === 'remediation' ? 'active' : ''}`}
+          onClick={() => setActiveTab('remediation')}
+          style={{ background: activeTab === 'remediation' ? '#f87171' : '#ffffff', color: activeTab === 'remediation' ? '#000000' : '#000000' }}
+        >
+          ⚡ Automated Remediation
+        </button>
       </div>
+
 
       <div className="status-badge">
         <span className="status-dot"></span>

@@ -47,3 +47,35 @@ class OutcomeResponse(OutcomeCreate):
 
     class Config:
         from_attributes = True
+
+
+class IncidentLogResponse(BaseModel):
+    id: int
+    incident_code: str
+    pipeline_node: str
+    error_rate: float
+    threshold: float
+    status: str
+    trigger_reason: str
+    dlq_table_name: str
+    pre_anomaly_snapshot_id: Optional[str] = None
+    paused_at: datetime
+    resumed_at: Optional[datetime] = None
+    duration_seconds: Optional[int] = None
+
+    class Config:
+        from_attributes = True
+
+
+class StreamSimulationRequest(BaseModel):
+    error_rate_percent: float = 4.5
+    pipeline_node: Optional[str] = "FLINK_CONNECTOR_01"
+
+
+class TimeTravelQueryRequest(BaseModel):
+    snapshot_id: str = "snap-1002"
+
+
+class RollbackRequest(BaseModel):
+    snapshot_id: str = "snap-1002"
+

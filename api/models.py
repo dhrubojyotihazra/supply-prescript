@@ -45,3 +45,35 @@ class Outcome(Base):
     evaluated_at = Column(DateTime, default=datetime.utcnow)
 
     decision = relationship("Decision", back_populates="outcome")
+
+
+class IncidentLog(Base):
+    __tablename__ = "incident_logs"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    incident_code = Column(String, nullable=False, unique=True, index=True)
+    pipeline_node = Column(String, nullable=False, default="FLINK_CONNECTOR_01")
+    error_rate = Column(Float, nullable=False)
+    threshold = Column(Float, nullable=False, default=2.0)
+    status = Column(String, nullable=False, default="TRIPPED_ROUTED_DLQ") # TRIPPED_ROUTED_DLQ, RESOLVED, ROLLED_BACK
+    trigger_reason = Column(String, nullable=False)
+    dlq_table_name = Column(String, nullable=False, default="warehouses_dlq_stream")
+    pre_anomaly_snapshot_id = Column(String, nullable=True, default="snap-1002")
+    paused_at = Column(DateTime, default=datetime.utcnow)
+    resumed_at = Column(DateTime, nullable=True)
+    duration_seconds = Column(Integer, nullable=True)
+
+
+class IcebergSnapshotRecord(Base):
+    __tablename__ = "iceberg_snapshot_records"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    snapshot_id = Column(String, nullable=False, unique=True, index=True)
+    table_name = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    parent_snapshot_id = Column(String, nullable=True)
+    record_count = Column(Integer, nullable=False, default=0)
+    commit_summary = Column(String, nullable=False)
+    status = Column(String, nullable=False, default="VALID")
+    is_current = Column(Integer, default=1)
+
