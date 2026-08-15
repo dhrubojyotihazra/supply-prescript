@@ -11,13 +11,13 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 engine = None
 if DATABASE_URL:
     try:
-        temp_engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 3})
+        temp_engine = create_engine(DATABASE_URL, pool_pre_ping=True, connect_args={"connect_timeout": 10})
         with temp_engine.connect() as conn:
             pass
         engine = temp_engine
         print("[DATABASE] Connected to Cloud Supabase PostgreSQL Database.")
     except Exception as e:
-        print(f"[WARNING] Supabase PostgreSQL connection unavailable. Falling back to local SQLite database.")
+        print(f"[WARNING] Supabase PostgreSQL connection unavailable ({e}). Falling back to local SQLite database.")
         engine = None
 
 if engine is None:
