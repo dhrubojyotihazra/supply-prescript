@@ -28,6 +28,7 @@ class Decision(Base):
     selected_option = Column(String, nullable=False)
     prescribed_cost = Column(Float, nullable=False)
     expected_delay_days = Column(Integer, nullable=False)
+    analyst_notes = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     warehouse = relationship("Warehouse", back_populates="decisions")

@@ -386,7 +386,8 @@ def execute_decision(decision: schemas.DecisionCreate, db: Session = Depends(get
         warehouse_id=decision.warehouse_id,
         selected_option=decision.selected_option,
         prescribed_cost=decision.prescribed_cost,
-        expected_delay_days=decision.expected_delay_days
+        expected_delay_days=decision.expected_delay_days,
+        analyst_notes=decision.analyst_notes
     )
     db.add(db_decision)
     db.commit()
@@ -408,3 +409,68 @@ def log_outcome(outcome: schemas.OutcomeCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_outcome)
     return db_outcome
+
+@app.get("/analyst-queue")
+def get_analyst_queue(
+    limit: int = Query(10, ge=1, le=50),
+    db: Session = Depends(get_db)
+):
+    """
+    Returns the top high-priority warehouses for the analyst to action,
+    ranked by a composite risk score (transport_issue_l1y + wh_breakdown_l3m + dist_from_hub factor).
+    Also returns pending decisions (executed but not yet outcome-logged) as a nudge.
+    """
+    warehouses = db.query(models.Warehouse).all()
+
+    # Compute risk score for each warehouse
+    scored = []
+    for wh in warehouses:
+        issues = wh.transport_issue_l1y or 0
+        breakdowns = wh.wh_breakdown_l3m or 0
+        dist = wh.dist_from_hub or 0
+        wt = wh.product_wg_ton or 0
+        risk_score = round(
+            (issues * 25) + (breakdowns * 20) + (min(dist, 100) * 0.3) + (min(wt, 500) * 0.05),
+            1
+        )
+        priority = "CRITICAL" if risk_score >= 80 else "HIGH" if risk_score >= 50 else "MEDIUM" if risk_score >= 20 else "LOW"
+        scored.append({
+            "warehouse_id": wh.warehouse_id,
+            "zone": wh.zone,
+            "location_type": wh.location_type,
+            "capacity_size": wh.capacity_size,
+            "status": wh.status,
+            "risk_score": risk_score,
+            "priority": priority,
+            "transport_issue_l1y": issues,
+            "wh_breakdown_l3m": breakdowns,
+            "dist_from_hub": dist,
+            "product_wg_ton": wt,
+            "workers_num": wh.workers_num
+        })
+
+    scored.sort(key=lambda x: x["risk_score"], reverse=True)
+    top_queue = scored[:limit]
+
+    # Identify decisions pending outcome logging
+    all_decisions = db.query(models.Decision).all()
+    all_outcomes = db.query(models.Outcome).all()
+    logged_decision_ids = {o.decision_id for o in all_outcomes}
+    pending_outcomes = [
+        {
+            "decision_id": d.id,
+            "warehouse_id": d.warehouse_id,
+            "selected_option": d.selected_option,
+            "prescribed_cost": d.prescribed_cost,
+            "expected_delay_days": d.expected_delay_days,
+            "analyst_notes": d.analyst_notes,
+            "created_at": d.created_at.isoformat() if d.created_at else None
+        }
+        for d in all_decisions if d.id not in logged_decision_ids
+    ]
+
+    return {
+        "priority_queue": top_queue,
+        "pending_outcome_count": len(pending_outcomes),
+        "pending_outcomes": pending_outcomes[:5]
+    }

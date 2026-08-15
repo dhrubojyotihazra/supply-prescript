@@ -23,10 +23,12 @@ class DecisionCreate(BaseModel):
     selected_option: str
     prescribed_cost: float
     expected_delay_days: int
+    analyst_notes: Optional[str] = None
 
 
 class DecisionResponse(DecisionCreate):
     id: int
+    analyst_notes: Optional[str] = None
     created_at: datetime
 
     class Config:

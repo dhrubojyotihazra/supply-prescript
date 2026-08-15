@@ -25,6 +25,13 @@ export default function Header({ activeTab, setActiveTab }) {
 
       <div className="nav-tabs">
         <button
+          className={`tab-btn ${activeTab === 'workspace' ? 'active' : ''}`}
+          onClick={() => setActiveTab('workspace')}
+          style={{ background: activeTab === 'workspace' ? '#c084fc' : '#ffffff' }}
+        >
+          Analyst Workspace
+        </button>
+        <button
           className={`tab-btn ${activeTab === 'monitor' ? 'active' : ''}`}
           onClick={() => setActiveTab('monitor')}
         >

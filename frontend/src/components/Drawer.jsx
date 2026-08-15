@@ -8,7 +8,8 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [executing, setExecuting] = useState(false);
-  const [activeTab, setActiveTab] = useState('solver'); // 'solver' or 'chat'
+  const [activeTab, setActiveTab] = useState('solver');
+  const [analystNotes, setAnalystNotes] = useState('');
   
   // AI Chatbot State
   const [messages, setMessages] = useState([
@@ -45,6 +46,10 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
   }, [warehouse]);
 
   const handleExecute = async (choice) => {
+    if (!analystNotes.trim()) {
+      alert('Please add your analyst reasoning notes before executing a decision.');
+      return;
+    }
     setExecuting(true);
     try {
       const res = await fetch(`${API_BASE}/execute-decision`, {
@@ -54,7 +59,8 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
           warehouse_id: warehouse.warehouse_id,
           selected_option: choice.label,
           prescribed_cost: choice.total_cost,
-          expected_delay_days: choice.expected_delay_days || 5
+          expected_delay_days: choice.expected_delay_days || 5,
+          analyst_notes: analystNotes.trim()
         })
       });
 
@@ -191,12 +197,33 @@ export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
                       Allocations: [{choice.allocations?.join(', ')}] tons
                     </div>
 
+                    {/* Analyst Notes (gated) */}
+                    <div style={{ marginTop: '0.25rem' }}>
+                      <label style={{ display: 'block', fontSize: '0.72rem', fontWeight: 900, textTransform: 'uppercase', color: '#000', marginBottom: '0.3rem' }}>
+                        Your Reasoning (required)
+                      </label>
+                      <textarea
+                        rows={2}
+                        style={{
+                          width: '100%', background: '#fff', border: '2px solid #000',
+                          borderRadius: '6px', padding: '0.5rem', fontSize: '0.78rem',
+                          fontFamily: 'inherit', fontWeight: 700, resize: 'none',
+                          boxShadow: '1px 1px 0px #000', outline: 'none', boxSizing: 'border-box',
+                        }}
+                        placeholder="Why are you choosing this option? e.g. Budget constraints in Q3..."
+                        value={analystNotes}
+                        onChange={e => setAnalystNotes(e.target.value)}
+                      />
+                    </div>
+
                     <button
                       className="btn-execute"
-                      disabled={executing}
+                      disabled={executing || analystNotes.trim().length < 10}
                       onClick={() => handleExecute(choice)}
+                      style={{ opacity: analystNotes.trim().length < 10 ? 0.5 : 1 }}
+                      title={analystNotes.trim().length < 10 ? 'Add reasoning notes above first' : ''}
                     >
-                      {executing ? 'Writing to Supabase...' : '⚡ Execute Decision (Save to DB)'}
+                      {executing ? 'Writing to Supabase...' : analystNotes.trim().length < 10 ? '✍️ Add reasoning to unlock execute' : '⚡ Execute Decision (Save to DB)'}
                     </button>
                   </div>
                 ))}
