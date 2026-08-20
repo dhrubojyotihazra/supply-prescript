@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://127.0.0.1:8000'
-  : '';
+  : (import.meta.env.VITE_API_BASE || 'https://supply-prescript-api.onrender.com');
 
 // ─── Workflow Step Tracker ────────────────────────────────────────────────────
 const STEPS = [
