@@ -60,10 +60,7 @@ export default function Header({ activeTab, setActiveTab }) {
       </div>
 
 
-      <div className="status-badge">
-        <span className="status-dot"></span>
-        <span>Supabase PostgreSQL Live</span>
-      </div>
     </header>
   );
 }
+
