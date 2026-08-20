@@ -31,7 +31,7 @@ export default function RemediationTab() {
 
   const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
-    : 'https://supply-prescript-api.onrender.com';
+    : '';
 
   const showNotice = (msg, type = 'info') => {
     setNotification({ msg, type });

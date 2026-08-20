@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-builds",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/health",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/warehouses(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/predict(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/prescribe(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/execute-decision(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/decisions(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/log-outcome(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/roi-analytics(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/analyst-queue(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/chat-assistant(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/remediation/(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/iceberg/(.*)",
+      "dest": "api/main.py"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "frontend/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "postgresql+psycopg2://postgres.sydqnicebxwatkfbthdy:qFrDDR7kKxnZKd1y@aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require"
+  }
+}

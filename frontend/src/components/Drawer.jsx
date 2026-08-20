@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:8000'
-  : 'https://supply-prescript-api.onrender.com';
+  ? 'http://127.0.0.1:8000'
+  : '';
 
 export default function Drawer({ warehouse, onClose, onDecisionExecuted }) {
   const [prescriptions, setPrescriptions] = useState([]);
